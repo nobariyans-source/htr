@@ -3,138 +3,826 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>شرکت هرمس تجهیز راد | نماینده انحصاری EMISAN ترکیه</title>
-  <meta name="description" content="هرمس تجهیز راد نماینده انحصاری شرکت EMISAN ترکیه در زمینه واردات و فروش دیزل ژنراتورهای صنعتی، بیمارستانی و پروژه‌ای از سال 1396" />
 
-  <!-- فونت فارسی -->
+  <title>هرمس تجهیز راد | نمایندگی انحصاری امیسان ترکیه | دیزل ژنراتور و گازسوز</title>
+  <meta name="description" content="هرمس تجهیز راد نماینده انحصاری امیسان ترکیه در ایران. فروش و خدمات پس از فروش ژنراتورهای دیزلی و گازسوز از برندهای معتبر مانند Perkins، MTU، Cummins و Volvo Penta. مشاوره رایگان، نصب حرفه‌ای، گارانتی و پشتیبانی 24/7.">
+  <meta name="keywords" content="هرمس تجهیز راد, امیسان, دیزل ژنراتور, ژنراتور گازسوز, ژنراتور صنعتی, ژنراتور بیمارستانی, Perkins, MTU, Cummins, Volvo Penta, فروش ژنراتور, خدمات ژنراتور">
+  <meta name="theme-color" content="#0B1237">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="هرمس تجهیز راد | نمایندگی انحصاری امیسان ترکیه">
+  <meta property="og:description" content="فروش ژنراتورهای دیزلی و گازسوز از برندهای معتبر جهانی با نصب و پشتیبانی تخصصی.">
+  <meta property="og:image" content="assets/img/og-cover.jpg">
+  <meta property="og:type" content="website">
+
+  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
 
-  <!-- استایل Tailwind -->
-  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
+  <!-- Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            sans: ["Vazirmatn", "system-ui"],
-          },
+          fontFamily: { sans: ["Vazirmatn","system-ui"] },
           colors: {
-            primary: "#1e3a8a",     // آبی صنعتی
-            primary600: "#172554",  // آبی نفتی
-            accent: "#111827",      // مشکی تیره
-            gold: "#fbbf24",        // زرد ایمنی
-            soft: "#f3f4f6",        // پس‌زمینه خاکستری روشن
+            navyDark:"#0B1237",
+            panel:"#0F1747",
+            neonBlue:"#4F7DF3",
+            neonPurple:"#A56EF7",
+            soft:"#F5F7FB",
+            ink:"#0f172a",
+            white:"#ffffff"
           },
-        },
-      },
+          boxShadow:{
+            card:"0 12px 36px rgba(0,0,0,.24)",
+            glow:"0 0 0 6px rgba(79,125,243,.16)"
+          }
+        }
+      }
     }
   </script>
-</head>
-<body class="bg-soft font-sans text-accent">
 
-  <!-- هدر -->
-  <header class="bg-primary text-white shadow-xl">
-    <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
-      <h1 class="text-2xl font-extrabold tracking-wide">هرمس تجهیز راد</h1>
-      <nav class="space-x-6 space-x-reverse font-semibold">
-        <a href="#about" class="hover:text-gold transition">درباره ما</a>
-        <a href="#products" class="hover:text-gold transition">محصولات</a>
-        <a href="#brands" class="hover:text-gold transition">برندها</a>
-        <a href="#contact" class="hover:text-gold transition">تماس با ما</a>
-      </nav>
+  <style>
+    html { scroll-behavior:smooth }
+    .hidden { display:none }
+    .hero-slide { position:absolute; inset:0; background-size:cover; background-position:center; opacity:0; transition:opacity .9s ease }
+    .hero-slide.active { opacity:1 }
+    .gradient-cta { background-image: linear-gradient(90deg, var(--tw-gradient-from, #4F7DF3), var(--tw-gradient-to, #A56EF7)); }
+    .fade { opacity:0; transform: translateY(10px); transition: opacity .6s ease, transform .6s ease; }
+    .fade.show { opacity:1; transform:none; }
+    .nav-blur { backdrop-filter: saturate(160%) blur(10px); }
+  </style>
+</head>
+<body class="bg-navyDark text-white font-sans">
+
+  <!-- Header -->
+  <header id="siteHeader" class="fixed top-0 inset-x-0 z-50 nav-blur bg-navyDark/80">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="#hero" class="flex items-center gap-3">
+       
+        <span class="sr-only">Hermes Tajhiz Rad | EMISAN</span>
+      </a>
+
+      <div class="flex items-center gap-4">
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#about" class="hover:text-neonBlue">About/درباره</a>
+          <a href="#services" class="hover:text-neonBlue">Services/خدمات</a>
+          <a href="#products" class="hover:text-neonBlue">Products/محصولات</a>
+          <a href="#brands" class="hover:text-neonBlue">Brands/برندها</a>
+          <a href="#blog" class="hover:text-neonBlue">Blog/بلاگ</a>
+          <a href="#contact" class="hover:text-neonBlue">Contact/تماس</a>
+        </nav>
+
+        <!-- Language dropdown -->
+        <label class="sr-only" for="langSelect">Change language</label>
+        <select id="langSelect" class="bg-white text-ink text-sm font-bold px-3 py-1 rounded-md hover:shadow cursor-pointer">
+          <option value="fa">فارسی (FA)</option>
+          <option value="en">English (EN)</option>
+          <option value="tr">Türkçe (TR)</option>
+        </select>
+      </div>
     </div>
   </header>
 
-  <!-- بنر -->
-  <section class="bg-gradient-to-r from-primary600 to-primary text-white py-24 text-center shadow-inner">
-    <h2 class="text-4xl font-extrabold mb-6">نماینده انحصاری EMISAN ترکیه</h2>
-    <p class="text-lg max-w-2xl mx-auto leading-relaxed">
-      واردات، تامین فوری، نصب و خدمات پس از فروش دیزل ژنراتورهای صنعتی و بیمارستانی از سال 1396
-    </p>
-    <a href="#contact" class="mt-8 inline-block bg-gold text-black font-bold px-8 py-3 rounded-lg shadow-lg hover:bg-yellow-500 hover:scale-105 transition">
-      دریافت پیش‌فاکتور
-    </a>
-  </section>
+  <!-- HERO (slider + rotating single-line text) -->
+  <section id="hero" class="relative h-[92vh] min-h-[560px] overflow-hidden">
+    <!-- Slides -->
+    <div class="hero-slide active" style="background-image:url('assets/hero-1.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('assets/hero-2.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('assets/hero-3.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('assets/hero-4.jpg')"></div>
 
-  <!-- درباره ما -->
-  <section id="about" class="py-20 max-w-6xl mx-auto px-6 text-center">
-    <h3 class="text-3xl font-extrabold text-primary mb-8">درباره هرمس تجهیز راد</h3>
-    <p class="text-lg leading-relaxed text-gray-700">
-      شرکت هرمس تجهیز راد از سال ۱۳۹۶ به عنوان نماینده انحصاری شرکت EMISAN ترکیه، در زمینه واردات و فروش دیزل ژنراتورهای صنعتی، بیمارستانی و پروژه‌ای فعالیت دارد.
-    </p>
-  </section>
+    <!-- overlay -->
+    <div class="absolute inset-0" style="background:
+      radial-gradient(60% 40% at 50% 60%, rgba(165,110,247,.22) 0%, rgba(15,23,42,0) 60%),
+      linear-gradient(180deg, rgba(11,18,55,.55) 0%, rgba(11,18,55,.75) 100%);"></div>
 
-  <!-- محصولات -->
-  <section id="products" class="py-20 bg-white text-center">
-    <h3 class="text-3xl font-extrabold text-primary mb-12">محصولات</h3>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-      <div class="p-8 bg-soft rounded-xl shadow-md hover:shadow-2xl transition">
-        <h4 class="text-xl font-bold mb-3 flex items-center gap-2 justify-center">
-          <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M12 6V3m0 18v-3m9-6h-3M6 12H3m15.364-6.364l-2.121 2.121M8.757 15.243l-2.121 2.121m0-12.728l2.121 2.121M15.243 15.243l2.121 2.121"/>
-          </svg>
-          دیزل ژنراتور صنعتی
-        </h4>
-        <p>با توان‌های مختلف مناسب کارخانجات و پروژه‌های بزرگ</p>
-      </div>
-      <div class="p-8 bg-soft rounded-xl shadow-md hover:shadow-2xl transition">
-        <h4 class="text-xl font-bold mb-3 flex items-center gap-2 justify-center">
-          <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M3 7h18M3 12h18M3 17h18"/>
-          </svg>
-          ژنراتور بیمارستانی
-        </h4>
-        <p>راهکار مطمئن برای تامین برق مراکز درمانی</p>
-      </div>
-      <div class="p-8 bg-soft rounded-xl shadow-md hover:shadow-2xl transition">
-        <h4 class="text-xl font-bold mb-3 flex items-center gap-2 justify-center">
-          <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M20 13V7a2 2 0 0 0-2-2h-5V3H7v2H2v13h2"/>
-          </svg>
-          ژنراتور پروژه‌ای
-        </h4>
-        <p>قابل استفاده در پروژه‌های عمرانی و کارگاهی</p>
+    <div class="relative z-10 h-full flex items-center">
+      <div class="max-w-7xl mx-auto px-6 w-full">
+        <!-- FA -->
+        <div class="lang fa max-w-3xl">
+          <h1 id="heroTextFa" class="text-3xl md:text-6xl font-extrabold mb-2 whitespace-nowrap overflow-hidden text-ellipsis">
+            قدرت، کیفیت، اعتماد
+          </h1>
+          <p class="text-lg md:text-xl text-white/90 mb-3">
+                   فروش ژنراتورهای دیزلی و گازسوز اروپایی، چینی و ...
+          </p>
+          <div class="flex flex-wrap items-center gap-3">
+            <a href="#contact" class="inline-flex items-center gap-2 px-7 py-3 rounded-lg font-bold shadow glow gradient-cta from-neonBlue to-neonPurple hover:shadow-lg">
+              <i data-lucide="send" class="w-3 h-3"></i> دریافت مشاوره رایگان
+            </a>
+            <a href="#products" class="inline-flex items-center gap-2 underline underline-offset-4 hover:text-neonBlue">
+              <i data-lucide="factory" class="w-3 h-3"></i> مشاهده محصولات
+            </a>
+          </div>
+        </div>
+
+        <!-- EN -->
+        <div class="lang en hidden max-w-3xl">
+          <h1 id="heroTextEn" class="text-3xl md:text-6xl font-extrabold mb-6 whitespace-nowrap overflow-hidden text-ellipsis">
+            Power, Quality, Trust
+          </h1>
+          <p class="text-lg md:text-xl text-white/90 mb-8">
+            Special sale of diesel & gas generators from global brands — Reliable power solutions | 🔧 Free expert consultation
+          </p>
+          <div class="flex flex-wrap items-center gap-3">
+            <a href="#contact" class="inline-flex items-center gap-2 px-7 py-3 rounded-lg font-bold shadow glow gradient-cta from-neonBlue to-neonPurple hover:shadow-lg">
+              <i data-lucide="send" class="w-5 h-5"></i> Get Free Consultation
+            </a>
+            <a href="#products" class="inline-flex items-center gap-2 underline underline-offset-4 hover:text-neonBlue">
+              <i data-lucide="factory" class="w-5 h-5"></i> View Products
+            </a>
+          </div>
+        </div>
+
+        <!-- TR -->
+        <div class="lang tr hidden max-w-3xl">
+          <h1 id="heroTextTr" class="text-3xl md:text-6xl font-extrabold mb-6 whitespace-nowrap overflow-hidden text-ellipsis">
+            Güç, Kalite, Güven
+          </h1>
+          <p class="text-lg md:text-xl text-white/90 mb-8">
+            Dünyaca ünlü markalardan dizel ve gaz jeneratörlerde özel fırsatlar — Güvenilir enerji çözümleri | 🔧 Ücretsiz uzman danışmanlık
+          </p>
+          <div class="flex flex-wrap items-center gap-3">
+            <a href="#contact" class="inline-flex items-center gap-2 px-7 py-3 rounded-lg font-bold shadow glow gradient-cta from-neonBlue to-neonPurple hover:shadow-lg">
+              <i data-lucide="send" class="w-5 h-5"></i> Ücretsiz Danışmanlık Alın
+            </a>
+            <a href="#products" class="inline-flex items-center gap-2 underline underline-offset-4 hover:text-neonBlue">
+              <i data-lucide="factory" class="w-5 h-5"></i> Ürünleri Görün
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- برندها -->
-  <section id="brands" class="py-20 text-center bg-soft">
-    <h3 class="text-3xl font-extrabold text-primary mb-12">برندهای معتبر</h3>
-    <div class="flex flex-wrap justify-center gap-8">
-      <div class="bg-white shadow-md p-4 rounded-lg">
-        <img src="assets/brand1.png" alt="Brand1" class="h-16">
+  <!-- ABOUT -->
+  <section id="about" class="py-24">
+    <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-start">
+
+      <div class="fade">
+        <!-- FA -->
+        <div class="lang fa">
+          <h2 class="text-3xl md:text-4xl font-extrabold mb-6">درباره هرمس تجهیز راد</h2>
+          <div class="leading-8 text-white/90 text-justify">
+            <p class="mb-4">
+              شرکت <strong>هرمس تجهیز راد</strong> فعالیت خود را از سال <strong>۱۳۹۶</strong> با هدف ارائه راهکارهای تخصصی در زمینه‌ی <strong>تأمین برق اضطراری و دائم</strong> آغاز کرد و در حال حاضر به عنوان <strong>نماینده انحصاری شرکت امیسان ترکیه (EMISAN)</strong> در ایران شناخته می‌شود. این مجموعه با بهره‌گیری از دانش مهندسی روز، تیم فنی مجرب و شبکه گسترده خدمات، به عنوان یکی از بازیگران اصلی بازار <strong>ژنراتورهای دیزلی و گازسوز</strong> در کشور مطرح است.
+            </p>
+            <p class="mb-4">
+              ما در هرمس تجهیز راد تمرکز خود را بر واردات، فروش، <strong>نصب و راه‌اندازی</strong>، و همچنین ارائه <strong>خدمات پس از فروش تخصصی</strong> محصولات متنوع در حوزه <strong>ژنراتورهای صنعتی</strong> قرار داده‌ایم. محصولات ما شامل ژنراتورهای <strong>دیزلی</strong> و <strong>گازسوز</strong> در بازه توانی <strong>۱۰ تا ۲۵۰۰ کیلوولت‌آمپر (kVA)</strong> است که از برندهای معتبر جهانی مانند <strong>Perkins، MTU، Cummins، Volvo Penta و EMISAN</strong> تأمین می‌گردد.
+            </p>
+            <p class="mb-4">
+              راهکارهای ما پاسخگوی نیاز طیف گسترده‌ای از مشتریان است، از جمله: <strong>صنایع بزرگ و سنگین</strong>، <strong>بیمارستان‌ها و مراکز درمانی</strong>، <strong>ساختمان‌های تجاری</strong>، <strong>پروژه‌های عمرانی، ساختمانی و معدنی</strong>، <strong>کسب‌وکارهای کوچک و متوسط</strong>، <strong>مزارع کشاورزی</strong> و حتی <strong>واحدهای مسکونی و ویلاها</strong>.
+            </p>
+            <p class="mb-4">
+              با بهره‌گیری از <strong>مشاوره تخصصی رایگان</strong>، تیم فنی ما شما را در <em>ظرفیت‌سنجی دقیق بار، انتخاب برند مناسب، طراحی سیستم سنکرون و تابلوهای ATS/AMF</em> و همچنین اجرای پروژه مطابق با استانداردهای بین‌المللی همراهی می‌کند.
+            </p>
+            <ul class="list-disc list-inside space-y-2 mb-4">
+              <li>بیش از <strong>۱۰ سال خدمات پس از فروش مستمر</strong></li>
+              <li><strong>۱ سال گارانتی کتبی معتبر</strong> برای تمامی محصولات</li>
+              <li>تأمین <strong>فوری قطعات یدکی اورجینال</strong> با ضمانت اصالت</li>
+              <li><strong>پشتیبانی ۲۴ ساعته، ۷ روز هفته</strong> حتی در ایام تعطیل</li>
+              <li><strong>سرویس و نگهداری دوره‌ای</strong> برای افزایش طول عمر دستگاه‌ها</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- EN -->
+        <div class="lang en hidden">
+          <h2 class="text-3xl md:text-4xl font-extrabold mb-6">About Hermes Tajhiz Rad</h2>
+          <div class="leading-8 text-white/90 text-justify">
+            <p class="mb-4">
+              <strong>Hermes Tajhiz Rad</strong> has been the <strong>exclusive representative of EMISAN Turkey</strong> in Iran since 2017. We import, distribute, <strong>install</strong>, and provide <strong>after-sales services</strong> for diesel and gas generators, delivering reliable and cost-effective solutions for both standby and prime power.
+            </p>
+            <p class="mb-4">
+              Our products range from <strong>10 to 2500 kVA</strong>, sourced from global brands like <strong>Perkins, MTU, Cummins, Volvo Penta</strong> and <strong>EMISAN</strong>, with applications across <strong>industries, hospitals, construction & mining, agriculture</strong> and even <strong>residential buildings</strong>.
+            </p>
+            <p class="mb-4">
+              Our engineers help you with <strong>accurate load sizing, generator selection, synchronization design, ATS/AMF panel implementation</strong> and standard-compliant project execution — all with <strong>free expert consultation</strong>.
+            </p>
+            <ul class="list-disc list-inside space-y-2 mb-4">
+              <li>10+ years of continuous after-sales support</li>
+              <li>1-year official warranty on all products</li>
+              <li>Immediate access to genuine spare parts</li>
+              <li>24/7 support even on holidays</li>
+              <li>Periodic maintenance for long-term reliability</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- TR -->
+        <div class="lang tr hidden">
+          <h2 class="text-3xl md:text-4xl font-extrabold mb-6">Hermes Tajhiz Rad Hakkında</h2>
+          <div class="leading-8 text-white/90 text-justify">
+            <p class="mb-4">
+              <strong>Hermes Tajhiz Rad</strong>, İran’da 2017’den beri <strong>EMISAN Türkiye’nin münhasır temsilcisi</strong>dir. Dizel ve gaz jeneratörlerinin ithalatı, satışı, <strong>kurulumu</strong> ve <strong>satış sonrası hizmetleri</strong> ile kesintisiz ve ekonomik güç çözümleri sunar.
+            </p>
+            <p class="mb-4">
+              Ürün portföyümüz <strong>10–2500 kVA</strong> aralığını kapsar ve <strong>Perkins, MTU, Cummins, Volvo Penta</strong> ve <strong>EMISAN</strong> gibi küresel markalardan tedarik edilir.
+            </p>
+            <p class="mb-4">
+              Mühendis ekibimiz <strong>yük hesaplaması, marka seçimi, senkronizasyon tasarımı ve ATS/AMF panoları</strong> konusunda <strong>ücretsiz uzman danışmanlığı</strong> sunar.
+            </p>
+            <ul class="list-disc list-inside space-y-2 mb-4">
+              <li><strong>10+ yıl</strong> satış sonrası destek</li>
+              <li>Tüm ürünlerde <strong>1 yıl resmi garanti</strong></li>
+              <li>Orijinal yedek parçalara hızlı erişim</li>
+              <li><strong>7/24</strong> destek ve periyodik bakım</li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <div class="bg-white shadow-md p-4 rounded-lg">
-        <img src="assets/brand2.png" alt="Brand2" class="h-16">
-      </div>
-      <div class="bg-white shadow-md p-4 rounded-lg">
-        <img src="assets/brand3.png" alt="Brand3" class="h-16">
-      </div>
-      <div class="bg-white shadow-md p-4 rounded-lg">
-        <img src="assets/brand4.png" alt="Brand4" class="h-16">
+
+      <div class="fade">
+        <img src="assets/about.jpg" alt="Hermes Tajhiz Rad - EMISAN exclusive representative in Iran" class="w-full rounded-2xl shadow-card object-cover">
       </div>
     </div>
   </section>
 
-  <!-- تماس با ما -->
-  <section id="contact" class="py-20 bg-white text-center">
-    <h3 class="text-3xl font-extrabold text-primary mb-8">تماس با ما</h3>
-    <p class="mb-6 text-lg font-medium">📞 04133248543 | 📧 info@htr.co.ir | 📷 اینستاگرام: htr.co.ir</p>
-    <form class="max-w-lg mx-auto text-right space-y-4">
-      <input type="text" placeholder="نام و نام خانوادگی" class="w-full border rounded p-3 focus:ring-2 focus:ring-primary">
-      <input type="email" placeholder="ایمیل" class="w-full border rounded p-3 focus:ring-2 focus:ring-primary">
-      <textarea placeholder="پیام شما" class="w-full border rounded p-3 h-32 focus:ring-2 focus:ring-primary"></textarea>
-      <button type="submit" class="bg-primary text-white px-8 py-3 rounded-lg font-bold hover:bg-primary600 transition shadow-md hover:scale-105">
-        ارسال پیام
-      </button>
-    </form>
+  <!-- SERVICES -->
+  <section id="services" class="py-24 bg-panel">
+    <div class="max-w-6xl mx-auto px-6">
+      <!-- FA -->
+      <div class="lang fa">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-10">خدمات ما</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <article class="bg-navyDark/60 border border-white/10 rounded-2xl p-6 shadow-card fade">
+            <i data-lucide="wrench" class="w-6 h-6 text-neonBlue mb-3"></i>
+            <h3 class="font-bold mb-2">نصب و راه‌اندازی</h3>
+            <p class="text-white/90 leading-7">جانمایی، فونداسیون، کابل‌کشی، سنکرون و تست بار طبق استانداردهای بین‌المللی؛ تحویل آماده‌به‌کار.</p>
+          </article>
+          <article class="bg-navyDark/60 border border-white/10 rounded-2xl p-6 shadow-card fade">
+            <i data-lucide="settings" class="w-6 h-6 text-neonBlue mb-3"></i>
+            <h3 class="font-bold mb-2">سرویس و نگهداری</h3>
+            <p class="text-white/90 leading-7">سرویس دوره‌ای، تعمیرات فوری، تامین قطعات یدکی اورجینال و افزایش عمر مفید تجهیزات.</p>
+          </article>
+          <article class="bg-navyDark/60 border border-white/10 rounded-2xl p-6 shadow-card fade">
+            <i data-lucide="book-open-check" class="w-6 h-6 text-neonBlue mb-3"></i>
+            <h3 class="font-bold mb-2">مشاوره تخصصی رایگان</h3>
+            <p class="text-white/90 leading-7">ظرفیت‌سنجی بار، انتخاب برند، طراحی تابلو ATS/AMF و راهکار اقتصادی متناسب با پروژه.</p>
+          </article>
+        </div>
+      </div>
+
+      <!-- EN -->
+      <div class="lang en hidden">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-10">Our Services</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <article class="bg-navyDark/60 border border-white/10 rounded-2xl p-6 shadow-card fade">
+            <i data-lucide="wrench" class="w-6 h-6 text-neonBlue mb-3"></i>
+            <h3 class="font-bold mb-2">Installation & Commissioning</h3>
+            <p class="text-white/90 leading-7">Placement, foundation, cabling, synchronization & load test per international standards; turnkey delivery.</p>
+          </article>
+          <article class="bg-navyDark/60 border border-white/10 rounded-2xl p-6 shadow-card fade">
+            <i data-lucide="settings" class="w-6 h-6 text-neonBlue mb-3"></i>
+            <h3 class="font-bold mb-2">Maintenance</h3>
+            <p class="text-white/90 leading-7">Periodic service, fast repairs, genuine spare parts, and increased system lifetime.</p>
+          </article>
+          <article class="bg-navyDark/60 border border-white/10 rounded-2xl p-6 shadow-card fade">
+            <i data-lucide="book-open-check" class="w-6 h-6 text-neonBlue mb-3"></i>
+            <h3 class="font-bold mb-2">Free Expert Consulting</h3>
+            <p class="text-white/90 leading-7">Load assessment, brand selection, ATS/AMF panel design, and cost-optimized solutions.</p>
+          </article>
+        </div>
+      </div>
+
+      <!-- TR -->
+      <div class="lang tr hidden">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-10">Hizmetlerimiz</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <article class="bg-navyDark/60 border border-white/10 rounded-2xl p-6 shadow-card fade">
+            <i data-lucide="wrench" class="w-6 h-6 text-neonBlue mb-3"></i>
+            <h3 class="font-bold mb-2">Kurulum & Devreye Alma</h3>
+            <p class="text-white/90 leading-7">Konumlandırma, temel, kablolama, senkronizasyon ve yük testi — anahtar teslim.</p>
+          </article>
+          <article class="bg-navyDark/60 border border-white/10 rounded-2xl p-6 shadow-card fade">
+            <i data-lucide="settings" class="w-6 h-6 text-neonBlue mb-3"></i>
+            <h3 class="font-bold mb-2">Bakım</h3>
+            <p class="text-white/90 leading-7">Periyodik servis, hızlı onarım, orijinal yedek parça ve uzun ömür.</p>
+          </article>
+          <article class="bg-navyDark/60 border border-white/10 rounded-2xl p-6 shadow-card fade">
+            <i data-lucide="book-open-check" class="w-6 h-6 text-neonBlue mb-3"></i>
+            <h3 class="font-bold mb-2">Ücretsiz Uzman Danışmanlık</h3>
+            <p class="text-white/90 leading-7">Yük hesaplama, marka seçimi, ATS/AMF panoları ve ekonomik çözümler.</p>
+          </article>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- فوتر -->
-  <footer class="bg-primary text-white text-center py-6 mt-12 shadow-inner">
-    <p class="font-medium">© 2025 هرمس تجهیز راد | طراحی و توسعه با ❤</p>
+  <!-- PRODUCTS -->
+  <section id="products" class="py-24">
+    <div class="max-w-6xl mx-auto px-6">
+
+      <!-- FA -->
+      <div class="lang fa">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-6">محصولات</h2>
+        <p class="text-white/90 leading-8 mb-10 text-justify">
+          ژنراتورهای <strong>دیزلی و گازسوز</strong> ما در بازه توان <strong>10 تا 3000 kVA</strong>، مناسب صنایع بزرگ، بیمارستان‌ها، پروژه‌های ساختمانی و معادن، کسب‌وکارهای کوچک و مصارف خانگی هستند. هر دستگاه با گارانتی معتبر، تست و نصب استاندارد، و <strong>۱۰ سال خدمات پس از فروش</strong> ارائه می‌شود.
+        </p>
+        <div class="grid md:grid-cols-3 gap-6">
+          <article class="rounded-2xl overflow-hidden bg-navyDark/60 border border-white/10 shadow-card fade">
+            <img src="assets/prod-industrial.jpg" alt="دیزل ژنراتور صنعتی" class="h-44 w-full object-cover">
+            <div class="p-6">
+              <h3 class="font-bold mb-2">دیزل ژنراتور صنعتی</h3>
+              <p class="text-white/90 leading-7">راندمان بالا، استهلاک کم و مناسب خطوط تولید و کارخانجات.</p>
+            </div>
+          </article>
+          <article class="rounded-2xl overflow-hidden bg-navyDark/60 border border-white/10 shadow-card fade">
+            <img src="assets/prod-hospital.jpg" alt="ژنراتور بیمارستانی" class="h-44 w-full object-cover">
+            <div class="p-6">
+              <h3 class="font-bold mb-2">دیزل ژنراتور بیمارستانی</h3>
+              <p class="text-white/90 leading-7">نویز کم، واکنش سریع با ATS/AMF و سازگار با استانداردهای درمانی.</p>
+            </div>
+            </article>
+          <article class="rounded-2xl overflow-hidden bg-navyDark/60 border border-white/10 shadow-card fade">
+            <img src="assets/controller.jpg" alt="کنترلر" class="h-44 w-full object-cover">
+            <div class="p-6">
+              <h3 class="font-bold mb-2">کنترلر </h3>
+              <p class="text-white/90 leading-7"> سنکرون دقیق با مانیتورینگ لحظه‌ای و حفاظت کامل برای برق بی‌وقفه </p>
+            </div>
+          </article>
+          <article class="rounded-2xl overflow-hidden bg-navyDark/60 border border-white/10 shadow-card fade">
+            <img src="assets/prod-project.jpg" alt="ژنراتور پروژه‌ای" class="h-44 w-full object-cover">
+            <div class="p-6">
+              <h3 class="font-bold mb-2">دیزل ژنراتور پروژه‌ای</h3>
+              <p class="text-white/90 leading-7">شاسی تقویت‌شده، مخزن بزرگ و مناسب پروژه‌های ساختمانی و معدنی.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- EN -->
+      <div class="lang en hidden">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-6">Products</h2>
+        <p class="text-white/90 leading-8 mb-10 text-justify">
+          Our <strong>diesel and gas</strong> generators range from <strong>10–3000 kVA</strong>, ideal for industries, hospitals, construction & mining projects, SMBs, and residential use. Each unit comes with valid warranty, on-site testing & installation, and <strong>10-year after-sales support</strong>.
+        </p>
+        <div class="grid md:grid-cols-3 gap-6">
+          <article class="rounded-2xl overflow-hidden bg-navyDark/60 border border-white/10 shadow-card fade">
+            <img src="assets/img/prod-industrial.jpg" alt="Industrial diesel generator" class="h-44 w-full object-cover">
+            <div class="p-6">
+              <h3 class="font-bold mb-2">Industrial Diesel Generators</h3>
+              <p class="text-white/90 leading-7">High efficiency, low wear; ideal for production lines & factories.</p>
+            </div>
+          </article>
+          <article class="rounded-2xl overflow-hidden bg-navyDark/60 border border-white/10 shadow-card fade">
+            <img src="assets/img/prod-hospital.jpg" alt="Hospital generator" class="h-44 w-full object-cover">
+            <div class="p-6">
+              <h3 class="font-bold mb-2">Hospital Generators</h3>
+              <p class="text-white/90 leading-7">Low noise, rapid ATS/AMF response, compliant with medical standards.</p>
+            </div>
+          </article>
+          <article class="rounded-2xl overflow-hidden bg-navyDark/60 border border-white/10 shadow-card fade">
+            <img src="assets/img/prod-project.jpg" alt="Project generator" class="h-44 w-full object-cover">
+            <div class="p-6">
+              <h3 class="font-bold mb-2">Project Generators</h3>
+              <p class="text-white/90 leading-7">Reinforced frame, large tank; built for construction & mining sites.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- TR -->
+      <div class="lang tr hidden">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-6">Ürünler</h2>
+        <p class="text-white/90 leading-8 mb-10 text-justify">
+          <strong>10–2500 kVA</strong> aralığındaki <strong>dizel ve gaz</strong> jeneratörlerimiz; sanayi, hastaneler, inşaat & madencilik projeleri, KOBİ’ler ve konut kullanımı için idealdir. Tüm cihazlar geçerli garanti, sahada test & kurulum ve <strong>10 yıl satış sonrası destek</strong> ile sunulur.
+        </p>
+        <div class="grid md:grid-cols-3 gap-6">
+          <article class="rounded-2xl overflow-hidden bg-navyDark/60 border border-white/10 shadow-card fade">
+            <img src="assets/img/prod-industrial.jpg" alt="Endüstriyel dizel jeneratör" class="h-44 w-full object-cover">
+            <div class="p-6">
+              <h3 class="font-bold mb-2">Endüstriyel Dizel Jeneratör</h3>
+              <p class="text-white/90 leading-7">Yüksek verim, düşük aşınma; üretim hatları ve fabrikalar için idealdir.</p>
+            </div>
+          </article>
+          <article class="rounded-2xl overflow-hidden bg-navyDark/60 border border-white/10 shadow-card fade">
+            <img src="assets/prod-hospital.jpg" alt="Hastane jeneratörü" class="h-44 w-full object-cover">
+            <div class="p-6">
+              <h3 class="font-bold mb-2">Hastane Jeneratörü</h3>
+              <p class="text-white/90 leading-7">Düşük gürültü, hızlı ATS/AMF tepkisi; tıbbi standartlara uygun.</p>
+            </div>
+          </article>
+          <article class="rounded-2xl overflow-hidden bg-navyDark/60 border border-white/10 shadow-card fade">
+            <img src="assets/prod-project.jpg" alt="Proje jeneratörü" class="h-44 w-full object-cover">
+            <div class="p-6">
+              <h3 class="font-bold mb-2">Proje Jeneratörü</h3>
+              <p class="text-white/90 leading-7">Güçlendirilmiş şasi, büyük depo; şantiye ve maden sahaları için.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+ <!-- BRANDS (Auto carousel every 1s) -->
+<section id="brands" class="py-20 bg-panel">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="lang fa">
+      <h2 class="text-3xl md:text-4xl font-extrabold mb-4">برندهای مورد اعتماد ما</h2>
+    </div>
+    <div class="lang tr hidden">
+      <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Güvendiğimiz Markalar</h2>
+    </div>
+
+    <!-- viewport -->
+    <div id="brandCarousel" class="overflow-x-hidden relative select-none">
+      <!-- track -->
+      <ul id="brandTrack" class="flex items-center gap-14 py-4">
+        <!-- هر LI یک برند -->
+        <li class="brand-item shrink-0 transition-all duration-300 opacity-100 grayscale-0">
+          <img src="assets/cummins.png" alt="Cummins" class="h-14 w-auto mx-auto" />
+        </li>
+        <li class="brand-item shrink-0 transition-all duration-300 opacity-60 grayscale">
+          <img src="assets/doosan.png" alt="Doosan" class="h-9 w-auto mx-auto" />
+        </li>
+        <li class="brand-item shrink-0 transition-all duration-300 opacity-60 grayscale">
+          <img src="assets/perkins.png" alt="Perkins" class="h-14 w-auto mx-auto" />
+        </li>
+        <li class="brand-item shrink-0 transition-all duration-300 opacity-60 grayscale">
+          <img src="assets/mtu.png" alt="MTU" class="h-14 w-auto mx-auto" />
+        </li>
+        <li class="brand-item shrink-0 transition-all duration-300 opacity-60 grayscale">
+          <img src="assets/cat.png" alt="CAT" class="h-11 w-auto mx-auto" />
+        </li>
+        <li class="brand-item shrink-0 transition-all duration-300 opacity-60 grayscale">
+          <img src="assets/abb.png" alt="ABB" class="h-9 w-auto mx-auto" />
+        </li>
+        <!-- برای چرخش نرم، می‌تونی چند برند اول رو دوباره تکرار کنی -->
+        <li class="brand-item shrink-0 transition-all duration-300 opacity-60 grayscale">
+          <img src="assets/cummins.png" alt="Cummins (dup)" class="h-14 w-auto mx-auto" />
+        </li>
+        <li class="brand-item shrink-0 transition-all duration-300 opacity-60 grayscale">
+          <img src="assets/doosan.png" alt="Doosan (dup)" class="h-9 w-auto mx-auto" />
+        </li>
+      </ul>
+    </div>
+
+    <!-- dots -->
+    <div id="brandDots" class="mt-5 flex justify-center gap-2"></div>
+  </div>
+</section>
+
+<script>
+  // --- Brand carousel ---
+  (function () {
+    const viewport = document.getElementById('brandCarousel');
+    const items = Array.from(document.querySelectorAll('#brandTrack .brand-item'));
+    const dotsWrap = document.getElementById('brandDots');
+
+    // ساخت دات‌ها
+    const dots = items.slice(0, items.length - 2) // اگر تکراری گذاشتی، دوتای آخر رو حساب نکن
+      .map((_, i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'h-2.5 w-2.5 rounded-full bg-white/40 hover:bg-white/70 transition';
+        b.addEventListener('click', () => go(i));
+        dotsWrap.appendChild(b);
+        return b;
+      });
+
+    let i = 0, timer;
+
+    function centerOn(idx) {
+      const target = items[idx];
+      const center = Math.max(0, target.offsetLeft - (viewport.clientWidth / 2 - target.clientWidth / 2));
+      viewport.scrollTo({ left: center, behavior: 'smooth' });
+    }
+
+    function paintActive() {
+      items.forEach((el, j) => {
+        const active = j === i;
+        el.classList.toggle('opacity-100', active);
+        el.classList.toggle('grayscale-0', active);
+        el.classList.toggle('opacity-60', !active);
+        el.classList.toggle('grayscale', !active);
+        el.classList.toggle('scale-105', active);
+      });
+      dots.forEach((d, j) => {
+        d.classList.toggle('bg-yellow-400', j === (i % dots.length));
+        d.classList.toggle('bg-white/40', j !== (i % dots.length));
+      });
+    }
+
+    function go(next) {
+      i = (next + items.length) % items.length;
+      paintActive();
+      centerOn(i);
+    }
+
+    function play() { stop(); timer = setInterval(() => go(i + 1), 1000); } // هر ۱ ثانیه
+    function stop() { if (timer) clearInterval(timer); }
+
+    // توقف روی هاور (اختیاری)
+    viewport.addEventListener('mouseenter', stop);
+    viewport.addEventListener('mouseleave', play);
+
+    // شروع
+    paintActive();
+    centerOn(i);
+    play();
+  })();
+</script>
+
+<style>
+  /* انتخابیه: اگه نمی‌خوای اسکرول‌بار افقی دیده بشه */
+  #brandCarousel::-webkit-scrollbar { display: none; }
+  #brandCarousel { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
+
+<!-- EN -->
+      <div class="lang en hidden">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-6">Global Brands We Supply</h2>
+        <p class="text-white/90 leading-8 mb-10 text-justify">
+          As EMISAN’s exclusive representative and an original products supplier, we offer generators from world-leading brands:
+          <strong>Perkins</strong>, <strong>MTU</strong>, <strong>Cummins</strong>, <strong>Volvo Penta</strong>, and more.
+        </p>
+      </div>
+
+      <!-- TR -->
+      <div class="lang tr hidden">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-6">Tedarik Ettiğimiz Markalar</h2>
+        <p class="text-white/90 leading-8 mb-10 text-justify">
+          EMISAN’ın İran’daki münhasır temsilcisi olarak <strong>Perkins</strong>, <strong>MTU</strong>, <strong>Cummins</strong>, <strong>Volvo Penta</strong> ve diğer önde gelen markaların orijinal ürünlerini sunuyoruz.
+        </p>
+      </div>
+
+
+
+  <!-- BLOG -->
+  <section id="blog" class="py-24">
+    <div class="max-w-6xl mx-auto px-6">
+
+      <!-- FA -->
+      <div class="lang fa">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-10">بلاگ تخصصی ژنراتور</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <article class="bg-navyDark/60 border border-white/10 rounded-2xl p-6 shadow-card fade">
+            <h3 class="font-bold text-xl mb-2">راهنمای انتخاب دیزل ژنراتور صنعتی</h3>
+            <p class="text-white/90 leading-7">از محاسبه بار اضطراری تا ضریب همزمانی، شرایط محیطی، نویز و مصرف سوخت—این مقاله قدم‌به‌قدم شما را برای انتخابی دقیق راهنمایی می‌کند.</p>
+            <a href="#" class="mt-3 inline-flex items-center gap-2 text-neonBlue hover:text-neonPurple">ادامه مطلب <i data-lucide="arrow-left" class="w-4 h-4"></i></a>
+          </article>
+          <article class="bg-navyDark/60 border border-white/10 rounded-2xl p-6 shadow-card fade">
+            <h3 class="font-bold text-xl mb-2">تفاوت ژنراتور دیزلی و گازسوز</h3>
+            <p class="text-white/90 leading-7">مزایا و معایب هرکدام، هزینه‌های نگهداری، تامین سوخت و کاربرد در صنایع مختلف را بررسی می‌کنیم تا انتخابی اقتصادی و فنی داشته باشید.</p>
+            <a href="#" class="mt-3 inline-flex items-center gap-2 text-neonBlue hover:text-neonPurple">ادامه مطلب <i data-lucide="arrow-left" class="w-4 h-4"></i></a>
+          </article>
+          <article class="bg-navyDark/60 border border-white/10 rounded-2xl p-6 shadow-card fade">
+            <h3 class="font-bold text-xl mb-2">ATS/AMF چیست و چه می‌کند؟</h3>
+            <p class="text-white/90 leading-7">تابلو سوئیچ خودکار بین شبکه و ژنراتور چگونه زمان قطعی را کاهش می‌دهد و ایمنی سیستم شما را بالا می‌برد؟</p>
+            <a href="#" class="mt-3 inline-flex items-center gap-2 text-neonBlue hover:text-neonPurple">ادامه مطلب <i data-lucide="arrow-left" class="w-4 h-4"></i></a>
+          </article>
+        </div>
+      </div>
+
+      <!-- EN -->
+      <div class="lang en hidden">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-10">Generator Blog</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <article class="bg-navyDark/60 border border-white/10 rounded-2xl p-6 shadow-card fade">
+            <h3 class="font-bold text-xl mb-2">How to Choose an Industrial Diesel Generator</h3>
+            <p class="text-white/90 leading-7">From standby load calculation to simultaneity factors, site conditions, noise, and fuel—this guide walks you through a precise selection.</p>
+            <a href="#" class="mt-3 inline-flex items-center gap-2 text-neonBlue hover:text-neonPurple">Read more <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </article>
+          <article class="bg-navyDark/60 border border-white/10 rounded-2xl p-6 shadow-card fade">
+            <h3 class="font-bold text-xl mb-2">Diesel vs Gas Generators</h3>
+            <p class="text-white/90 leading-7">Pros & cons, maintenance costs, fuel logistics, and use cases to help you make a technical and economic decision.</p>
+            <a href="#" class="mt-3 inline-flex items-center gap-2 text-neonBlue hover:text-neonPurple">Read more <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </article>
+          <article class="bg-navyDark/60 border border-white/10 rounded-2xl p-6 shadow-card fade">
+            <h3 class="font-bold text-xl mb-2">What is ATS/AMF?</h3>
+            <p class="text-white/90 leading-7">How automatic transfer switching between mains and generator reduces downtime and boosts safety.</p>
+            <a href="#" class="mt-3 inline-flex items-center gap-2 text-neonBlue hover:text-neonPurple">Read more <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </article>
+        </div>
+      </div>
+
+      <!-- TR -->
+      <div class="lang tr hidden">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-10">Jeneratör Blogu</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <article class="bg-navyDark/60 border border-white/10 rounded-2xl p-6 shadow-card fade">
+            <h3 class="font-bold text-xl mb-2">Endüstriyel Dizel Jeneratör Seçimi</h3>
+            <p class="text-white/90 leading-7">Yedek güç hesabından eşzamanlılık katsayılarına, saha koşulları, gürültü ve yakıt tüketimine kadar adım adım rehber.</p>
+            <a href="#" class="mt-3 inline-flex items-center gap-2 text-neonBlue hover:text-neonPurple">Devamı <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </article>
+          <article class="bg-navyDark/60 border border-white/10 rounded-2xl p-6 shadow-card fade">
+            <h3 class="font-bold text-xl mb-2">Dizel mi Gaz mı?</h3>
+            <p class="text-white/90 leading-7">Artıları/eksileri, bakım maliyetleri, yakıt lojistiği ve kullanım senaryoları.</p>
+            <a href="#" class="mt-3 inline-flex items-center gap-2 text-neonBlue hover:text-neonPurple">Devamı <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </article>
+          <article class="bg-navyDark/60 border border-white/10 rounded-2xl p-6 shadow-card fade">
+            <h3 class="font-bold text-xl mb-2">ATS/AMF Nedir?</h3>
+            <p class="text-white/90 leading-7">Şebeke ve jeneratör arasında otomatik geçiş ile kesintiyi azaltma ve güvenliği artırma.</p>
+            <a href="#" class="mt-3 inline-flex items-center gap-2 text-neonBlue hover:text-neonPurple">Devamı <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </article>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-24 bg-panel">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-start">
+
+      <div class="fade">
+        <!-- FA -->
+        <div class="lang fa">
+          <h2 class="text-3xl md:text-4xl font-extrabold mb-6">تماس با ما</h2>
+          <p class="text-white/90 leading-8 mb-6">📞 04133248543 | 📧 info@htr.co.ir | 📷 اینستاگرام: htr.co.ir</p>
+          <div class="bg-navyDark/60 border border-white/10 rounded-2xl p-6">
+            <h3 class="font-bold mb-2">ساعات پاسخگویی</h3>
+            <p class="text-white/90 leading-7">شنبه تا چهارشنبه ۹–۱۷ | پنجشنبه ۹–۱۳</p>
+          </div>
+        </div>
+
+        <!-- EN -->
+        <div class="lang en hidden">
+          <h2 class="text-3xl md:text-4xl font-extrabold mb-6">Contact Us</h2>
+          <p class="text-white/90 leading-8 mb-6">📞 +98 41 3324 8543 | 📧 info@htr.co.ir | 📷 Instagram: htr.co.ir</p>
+          <div class="bg-navyDark/60 border border-white/10 rounded-2xl p-6">
+            <h3 class="font-bold mb-2">Working Hours</h3>
+            <p class="text-white/90 leading-7">Sat–Wed 9:00–17:00 | Thu 9:00–13:00</p>
+          </div>
+        </div>
+
+        <!-- TR -->
+        <div class="lang tr hidden">
+          <h2 class="text-3xl md:text-4xl font-extrabold mb-6">İletişim</h2>
+          <p class="text-white/90 leading-8 mb-6">📞 +98 41 3324 8543 | 📧 info@htr.co.ir | 📷 Instagram: htr.co.ir</p>
+          <div class="bg-navyDark/60 border border-white/10 rounded-2xl p-6">
+            <h3 class="font-bold mb-2">Çalışma Saatleri</h3>
+            <p class="text-white/90 leading-7">Cumartesi–Çarşamba 9:00–17:00 | Perşembe 9:00–13:00</p>
+          </div>
+        </div>
+      </div>
+
+      <form class="bg-navyDark/60 border border-white/10 rounded-2xl p-8 shadow-card fade">
+        <!-- FA -->
+        <div class="lang fa">
+          <div class="grid gap-4 mb-4">
+            <input class="bg-white text-ink rounded-lg px-4 py-3" placeholder="نام و نام خانوادگی" type="text">
+            <input class="bg-white text-ink rounded-lg px-4 py-3" placeholder="ایمیل" type="email">
+            <textarea class="bg-white text-ink rounded-lg px-4 py-3 h-32" placeholder="پیام شما"></textarea>
+          </div>
+          <button class="gradient-cta from-neonBlue to-neonPurple text-white px-6 py-3 rounded-lg font-bold hover:shadow-lg">ارسال پیام</button>
+        </div>
+
+        <!-- EN -->
+        <div class="lang en hidden">
+          <div class="grid gap-4 mb-4">
+            <input class="bg-white text-ink rounded-lg px-4 py-3" placeholder="Full Name" type="text">
+            <input class="bg-white text-ink rounded-lg px-4 py-3" placeholder="Email" type="email">
+            <textarea class="bg-white text-ink rounded-lg px-4 py-3 h-32" placeholder="Your Message"></textarea>
+          </div>
+          <button class="gradient-cta from-neonBlue to-neonPurple text-white px-6 py-3 rounded-lg font-bold hover:shadow-lg">Send Message</button>
+        </div>
+
+        <!-- TR -->
+        <div class="lang tr hidden">
+          <div class="grid gap-4 mb-4">
+            <input class="bg-white text-ink rounded-lg px-4 py-3" placeholder="Ad Soyad" type="text">
+            <input class="bg-white text-ink rounded-lg px-4 py-3" placeholder="E-posta" type="email">
+            <textarea class="bg-white text-ink rounded-lg px-4 py-3 h-32" placeholder="Mesajınız"></textarea>
+          </div>
+          <button class="gradient-cta from-neonBlue to-neonPurple text-white px-6 py-3 rounded-lg font-bold hover:shadow-lg">Mesaj Gönder</button>
+        </div>
+      </form>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-navyDark border-top border-white/10">
+    <div class="max-w-7xl mx-auto px-6 py-8 grid md:grid-cols-4 gap-8">
+      <div class="fade">
+        <h4 class="font-extrabold text-lg mb-3">HTR | EMISAN</h4>
+        <p class="text-white/70 text-sm leading-7">راهکارهای مطمئن برق پایدار؛ از مشاوره تا نصب و نگهداری.</p>
+      </div>
+      <div class="fade">
+        <h5 class="font-bold mb-3">دسترسی سریع</h5>
+        <ul class="text-white/80 text-sm space-y-2">
+          <li><a href="#products" class="hover:text-neonBlue">محصولات</a></li>
+          <li><a href="#brands" class="hover:text-neonBlue">برندها</a></li>
+          <li><a href="#blog" class="hover:text-neonBlue">بلاگ</a></li>
+          <li><a href="#contact" class="hover:text-neonBlue">تماس</a></li>
+        </ul>
+      </div>
+      <div class="fade">
+        <h5 class="font-bold mb-3">خدمات</h5>
+        <ul class="text-white/80 text-sm space-y-2">
+          <li>مشاوره و طراحی</li>
+          <li>نصب و راه‌اندازی</li>
+          <li>سرویس و نگهداری</li>
+        </ul>
+      </div>
+      <div class="fade">
+        <h5 class="font-bold mb-3">ارتباط</h5>
+        <ul class="text-white/80 text-sm space-y-2">
+          <li>📞 04133248543</li>
+          <li>📧 info@htr.co.ir</li>
+          <li>📍 ایران- تبریز - برج شهر - طبقه 9</li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-center py-4 text-white/70 text-sm border-t border-white/10">
+      <div class="lang fa">© 2025 هرمس تجهیز راد | طراحی و سئو توسط <strong>سودا نوبریان</strong></div>
+      <div class="lang en hidden">© 2025 Hermes Tajhiz Rad | Design & SEO by <strong>Souda Nobariyan</strong></div>
+      <div class="lang tr hidden">© 2025 Hermes Tajhiz Rad | Tasarım & SEO: <strong>Souda Nobariyan</strong></div>
+    </div>
   </footer>
 
+  <!-- Scripts -->
+  <script>
+    // icons
+    lucide.createIcons();
+
+    // header style
+    const header = document.getElementById('siteHeader');
+    function setHeader(){ header.classList.add('nav-blur'); }
+    setHeader(); window.addEventListener('scroll', setHeader);
+
+    // --- language: FA / EN / TR only ---
+    const selectEl = document.getElementById('langSelect');
+    const SUPPORTED = ['fa','en','tr'];
+    const DEFAULT_LANG = 'fa';
+
+    function applyLang(lang) {
+      if (!SUPPORTED.includes(lang)) lang = DEFAULT_LANG;
+
+      // Hide all, show current
+      document.querySelectorAll('.lang').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.lang.' + lang).forEach(el => el.classList.remove('hidden'));
+
+      // Set html attrs
+      document.documentElement.lang = lang;
+      document.documentElement.dir  = (lang === 'fa') ? 'rtl' : 'ltr';
+
+      // Persist
+      localStorage.setItem('htr_lang', lang);
+      if (selectEl) selectEl.value = lang;
+    }
+
+    const savedLang = localStorage.getItem('htr_lang') || DEFAULT_LANG;
+    applyLang(savedLang);
+    if (selectEl) selectEl.addEventListener('change', e => applyLang(e.target.value));
+
+    // rotating hero text per language
+    const msgMap = {
+      fa: ["قدرت، کیفیت، اعتماد","فروش ویژه ژنراتورهای دیزلی و گازسوز","مشاوره تخصصی رایگان متناسب با نیاز شما"],
+      en: ["Power, Quality, Trust","Special Deals on Diesel & Gas Generators","Free Expert Consultation Tailored to Your Needs"],
+      tr: ["Güç, Kalite, Güven","Dizel & Gaz Jeneratörlerde Özel Fırsatlar","İhtiyacınıza Özel Ücretsiz Danışmanlık"]
+    };
+    const heroIds = { fa:'heroTextFa', en:'heroTextEn', tr:'heroTextTr' };
+    const heroEls = {};
+    Object.entries(heroIds).forEach(([k,id])=> heroEls[k] = document.getElementById(id));
+    const rotIdx = { fa:0, en:0, tr:0 };
+
+    setInterval(() => {
+      const cur = localStorage.getItem('htr_lang') || DEFAULT_LANG;
+      const el  = heroEls[cur];
+      if (!el) return;
+      el.classList.add('opacity-0');
+      setTimeout(() => {
+        rotIdx[cur] = (rotIdx[cur] + 1) % msgMap[cur].length;
+        el.textContent = msgMap[cur][rotIdx[cur]];
+        el.classList.remove('opacity-0');
+      }, 700);
+    }, 2400);
+
+    // hero slides
+    const slides = Array.from(document.querySelectorAll('.hero-slide'));
+    let slideIdx = 0;
+    setInterval(()=>{ slideIdx=(slideIdx+1)%slides.length; slides.forEach((s,i)=>s.classList.toggle('active', i===slideIdx)); }, 5000);
+
+    // reveal on scroll
+    const io = new IntersectionObserver((ents)=>ents.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); }), {threshold:.18});
+    document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+  </script>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"هرمس تجهیز راد",
+    "url":"https://example.com",
+    "logo":"https://example.com/assets/img/logo-htr-emisan.jpg",
+    "sameAs":["https://instagram.com/htr.co.ir"],
+    "contactPoint":[{
+      "@type":"ContactPoint",
+      "telephone":"+98-41-3324-8543",
+      "contactType":"customer service",
+      "areaServed":"IR"
+    }]
+  }
+  </script>
 </body>
 </html>
