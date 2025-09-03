@@ -8,6 +8,7 @@
   <meta name="description" content="هرمس تجهیز راد نماینده انحصاری امیسان ترکیه در ایران. فروش و خدمات پس از فروش ژنراتورهای دیزلی و گازسوز از برندهای معتبر مانند Perkins، MTU، Cummins و Volvo Penta. مشاوره رایگان، نصب حرفه‌ای، گارانتی و پشتیبانی 24/7.">
   <meta name="keywords" content="هرمس تجهیز راد, امیسان, دیزل ژنراتور, ژنراتور گازسوز, ژنراتور صنعتی, ژنراتور بیمارستانی, Perkins, MTU, Cummins, Volvo Penta, فروش ژنراتور, خدمات ژنراتور">
   <meta name="theme-color" content="#0B1237">
+  <meta name="robots" content="index,follow">
 
   <!-- Open Graph -->
   <meta property="og:title" content="هرمس تجهیز راد | نمایندگی انحصاری امیسان ترکیه">
@@ -16,10 +17,12 @@
   <meta property="og:type" content="website">
 
   <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
 
   <!-- Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://unpkg.com/lucide@latest" defer></script>
 
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -49,107 +52,108 @@
   </script>
 
   <style>
-    :root{ --brand-gap: 0.5rem; } /* فاصله بین لوگوها */
-    html { scroll-behavior:smooth }
-    .hidden { display:none }
-    .nav-blur { backdrop-filter: saturate(160%) blur(10px) }
-    .hero-slide { position:absolute; inset:0; background-size:cover; background-position:center; opacity:0; transition:opacity 7.s ease }
-    .hero-slide.active { opacity:1 }
-    .gradient-cta { background-image: linear-gradient(90deg, var(--tw-gradient-from,#4F7DF3), var(--tw-gradient-to,#A56EF7)); }
-    .fade { opacity:0; transform: translateY(10px); transition: opacity .6s ease, transform .6s ease; }
-    .fade.show { opacity:1; transform:none; }
+    :root{ --brand-gap:.5rem; }
+    html{ scroll-behavior:smooth }
+    .hidden{ display:none }
+    .nav-blur{ backdrop-filter:saturate(160%) blur(10px) }
+    .hero-slide{ position:absolute; inset:0; background-size:cover; background-position:center; opacity:0; transition:opacity 7s ease }
+    .hero-slide.active{ opacity:1 }
+    .gradient-cta{ background-image:linear-gradient(90deg,#4F7DF3,#A56EF7) }
+    .fade{ opacity:0; transform:translateY(10px); transition:opacity .6s ease, transform .6s ease }
+    .fade.show{ opacity:1; transform:none }
+    .latin{ direction:ltr; display:inline-block }
+    /* LTR isolation for emails/URLs (نه برای tel) */
+    .keep-ltr{ direction:ltr; unicode-bidi:isolate; display:inline-block }
 
-    /* نوار برندها (شیشه‌ای روشن) */
-    .brand-strip {
+    /* Glass card */
+    .brand-strip{
       background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
       border: 1px solid rgba(255,255,255,.16);
       border-radius: 1rem;
-      backdrop-filter: blur(8px) saturate(140%);
-      box-shadow: var(--tw-shadow,0 0 #0000), 0 8px 30px rgba(0,0,0,.25);
+      backdrop-filter: blur(10px) saturate(140%);
+      box-shadow: 0 8px 30px rgba(0,0,0,.25);
     }
-    .brand-viewport{ overflow: hidden; position: relative; direction:ltr; } /* مهم: LTR حتی در صفحات RTL */
-    .brand-track{
-      display:flex; align-items:center; gap: var(--brand-gap); direction:ltr;
-      will-change: transform; transform: translateX(0);
+    .brand-viewport{ overflow:hidden; position:relative; direction:ltr }
+    .brand-track{ display:flex; align-items:center; gap:var(--brand-gap); direction:ltr; will-change:transform; transform:translateX(0) }
+    .brand-item{ flex:0 0 calc((100% - 3*var(--brand-gap))/4); display:flex; align-items:center; justify-content:center; filter:grayscale(100%); opacity:.65; transition:all .35s ease }
+    .brand-item:hover{ filter:none; opacity:1; transform:translateY(-2px) }
+    .brand-logo{ max-height:48px; width:auto }
+    @media (max-width:768px){
+      :root{ --brand-gap:1.25rem }
+      .brand-item{ flex-basis:calc((100% - 2*var(--brand-gap))/3) }
+      .brand-logo{ max-height:40px }
     }
-    .brand-item{
-      flex: 0 0 calc((100% - 3*var(--brand-gap))/4); /* دقیقا ۴ لوگو */
-      display:flex; align-items:center; justify-content:center;
-      filter: grayscale(100%); opacity:.65; transition: all .35s ease;
-    }
-    .brand-item:hover{ filter:none; opacity:1; transform: translateY(-2px) }
-    .brand-logo{ max-height: 48px; width:auto }
-    @media (max-width: 768px){
-      :root{ --brand-gap: 1.25rem; }
-      .brand-item{ flex-basis: calc((100% - 2*var(--brand-gap))/3) } /* موبایل: ۳ لوگو */
-      .brand-logo{ max-height: 40px }
-    }
-
-    /* نقطه‌های اسلایدر برندها */
-    .dot{ width:7px;height:7px;border-radius:9999px;background:#ffffff4d;transition:.3s }
+    .dot{ width:7px; height:7px; border-radius:9999px; background:#ffffff4d; transition:.3s }
     .dot.active{ background:#fff }
+
+    /* Galleries (cards + modal + products) */
+    .g-stage{ position:relative }
+    .g-slide{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .45s ease }
+    .g-slide.active{ opacity:1 }
+    .g-dot{ width:8px; height:8px; border-radius:9999px; background:#ffffff4d }
+    .g-dot.active{ background:#fff }
   </style>
 </head>
 
 <body class="bg-navyDark text-white font-sans">
 
+  <!-- HEADER -->
   <header id="siteHeader" class="fixed top-0 inset-x-0 z-50 nav-blur bg-navyDark/70 border-b border-white/10">
-  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-    <a href="#hero" class="flex items-center gap-3">
-      <span class="text-white/90 font-extrabold tracking-tight">HTR | EMISAN</span>
-      <span class="sr-only">Hermes Tajhiz Rad | EMISAN</span>
-    </a>
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="#hero" class="flex items-center gap-3">
+        <span class="text-white/90 font-extrabold tracking-tight">HTR | EMISAN</span>
+        <span class="sr-only">Hermes Tajhiz Rad | EMISAN</span>
+      </a>
 
-    <div class="flex items-center gap-4">
-      <!-- NAV: متن هر آیتم بر اساس زبان تغییر می‌کند -->
-      <nav class="hidden md:flex items-center gap-6 text-sm">
-        <a href="#about" class="hover:text-neonBlue">
-          <span class="lang fa">درباره</span>
-          <span class="lang en hidden">About</span>
-          <span class="lang tr hidden">Hakkımızda</span>
-        </a>
+      <div class="flex items-center gap-4">
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#about" class="hover:text-neonBlue">
+            <span class="lang fa">درباره</span>
+            <span class="lang en hidden">About</span>
+            <span class="lang tr hidden">Hakkımızda</span>
+          </a>
+          <a href="#services" class="hover:text-neonBlue">
+            <span class="lang fa">خدمات</span>
+            <span class="lang en hidden">Services</span>
+            <span class="lang tr hidden">Hizmetler</span>
+          </a>
+          <a href="#products" class="hover:text-neonBlue">
+            <span class="lang fa">محصولات</span>
+            <span class="lang en hidden">Products</span>
+            <span class="lang tr hidden">Ürünler</span>
+          </a>
+          <a href="#projects" class="hover:text-neonBlue">
+            <span class="lang fa">پروژه‌های اجرایی</span>
+            <span class="lang en hidden">Projects</span>
+            <span class="lang tr hidden">Projeler</span>
+          </a>
+          <a href="#brands" class="hover:text-neonBlue">
+            <span class="lang fa">برندها</span>
+            <span class="lang en hidden">Brands</span>
+            <span class="lang tr hidden">Markalar</span>
+          </a>
+          <a href="#blog" class="hover:text-neonBlue">
+            <span class="lang fa">بلاگ</span>
+            <span class="lang en hidden">Blog</span>
+            <span class="lang tr hidden">Blog</span>
+          </a>
+          <a href="#contact" class="hover:text-neonBlue">
+            <span class="lang fa">تماس</span>
+            <span class="lang en hidden">Contact</span>
+            <span class="lang tr hidden">İletişim</span>
+          </a>
+        </nav>
 
-        <a href="#services" class="hover:text-neonBlue">
-          <span class="lang fa">خدمات</span>
-          <span class="lang en hidden">Services</span>
-          <span class="lang tr hidden">Hizmetler</span>
-        </a>
-
-        <a href="#products" class="hover:text-neonBlue">
-          <span class="lang fa">محصولات</span>
-          <span class="lang en hidden">Products</span>
-          <span class="lang tr hidden">Ürünler</span>
-        </a>
-
-        <a href="#brands" class="hover:text-neonBlue">
-          <span class="lang fa">برندها</span>
-          <span class="lang en hidden">Brands</span>
-          <span class="lang tr hidden">Markalar</span>
-        </a>
-
-        <a href="#blog" class="hover:text-neonBlue">
-          <span class="lang fa">بلاگ</span>
-          <span class="lang en hidden">Blog</span>
-          <span class="lang tr hidden">Blog</span>
-        </a>
-
-        <a href="#contact" class="hover:text-neonBlue">
-          <span class="lang fa">تماس</span>
-          <span class="lang en hidden">Contact</span>
-          <span class="lang tr hidden">İletişim</span>
-        </a>
-      </nav>
-
-      <!-- Language dropdown -->
-      <label class="sr-only" for="langSelect">Change language</label>
-      <select id="langSelect" class="bg-white text-ink text-sm font-bold px-3 py-1 rounded-md hover:shadow cursor-pointer">
-        <option value="fa">فارسی (FA)</option>
-        <option value="en">English (EN)</option>
-        <option value="tr">Türkçe (TR)</option>
-      </select>
+        <!-- Language dropdown -->
+        <label class="sr-only" for="langSelect">Change language</label>
+        <select id="langSelect" class="bg-white text-ink text-sm font-bold px-3 py-1 rounded-md hover:shadow cursor-pointer">
+          <option value="fa">فارسی (FA)</option>
+          <option value="en">English (EN)</option>
+          <option value="tr">Türkçe (TR)</option>
+        </select>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
 
   <!-- HERO -->
   <section id="hero" class="relative h-[92vh] min-h-[560px] overflow-hidden">
@@ -177,14 +181,12 @@
         <div class="max-w-2xl">
           <!-- FA -->
           <div class="lang fa">
-            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4">
-              قدرت، کیفیت، اعتماد
-            </h1>
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4">قدرت، کیفیت، اعتماد</h1>
             <p class="text-white/90 text-lg md:text-xl leading-8 mb-7">
               راهکارهای مطمئن برق پایدار؛ واردات، نصب و پشتیبانی تخصصی ژنراتورهای دیزلی و گازسوز از برندهای معتبر جهانی.
             </p>
             <div class="flex flex-wrap items-center gap-3">
-              <a href="#contact" class="inline-flex items-center gap-2 px-7 py-3 rounded-xl font-bold shadow glow gradient-cta from-neonBlue to-neonPurple hover:shadow-lg">
+              <a href="#contact" class="inline-flex items-center gap-2 px-7 py-3 rounded-xl font-bold shadow glow gradient-cta hover:shadow-lg">
                 <i data-lucide="send" class="w-4 h-4"></i> دریافت مشاوره رایگان
               </a>
               <a href="#products" class="inline-flex items-center gap-2 underline underline-offset-4 hover:text-neonBlue">
@@ -200,7 +202,7 @@
               Reliable power solutions — importing, installing, and supporting premium diesel & gas generators from global brands.
             </p>
             <div class="flex flex-wrap items-center gap-3">
-              <a href="#contact" class="inline-flex items-center gap-2 px-7 py-3 rounded-xl font-bold shadow glow gradient-cta from-neonBlue to-neonPurple hover:shadow-lg">
+              <a href="#contact" class="inline-flex items-center gap-2 px-7 py-3 rounded-xl font-bold shadow glow gradient-cta hover:shadow-lg">
                 <i data-lucide="send" class="w-5 h-5"></i> Get Free Consultation
               </a>
               <a href="#products" class="inline-flex items-center gap-2 underline underline-offset-4 hover:text-neonBlue">
@@ -216,7 +218,7 @@
               Dünya markalarından dizel ve gaz jeneratörleri — kurulum ve satış sonrası profesyonel destek ile.
             </p>
             <div class="flex flex-wrap items-center gap-3">
-              <a href="#contact" class="inline-flex items-center gap-2 px-7 py-3 rounded-xl font-bold shadow glow gradient-cta from-neonBlue to-neonPurple hover:shadow-lg">
+              <a href="#contact" class="inline-flex items-center gap-2 px-7 py-3 rounded-xl font-bold shadow glow gradient-cta hover:shadow-lg">
                 <i data-lucide="send" class="w-5 h-5"></i> Ücretsiz Danışmanlık
               </a>
               <a href="#products" class="inline-flex items-center gap-2 underline underline-offset-4 hover:text-neonBlue">
@@ -226,71 +228,71 @@
           </div>
         </div>
 
-        <!-- highlight card (glass) - MULTI-LANG -->
+        <!-- Highlight GLASS card -->
         <div class="hidden lg:block">
-          <div class="rounded-2xl p-6 brand-strip shadow-glass">
+          <div class="brand-strip shadow-glass rounded-2xl p-6">
             <!-- FA -->
             <div class="lang fa">
-              <div class="grid grid-cols-2 gap-4">
-                <div class="space-y-2">
-                  <div class="text-white/80 text-sm">پوشش پروژه‌های صنعتی</div>
-                  <div class="text-2xl font-extrabold">  10–3000 کاوا</div>
-                </div>
-                <div class="space-y-2">
-                  <div class="text-white/80 text-sm">گارانتی</div>
-                  <div class="text-2xl font-extrabold">۱ سال رسمی</div>
-                </div>
-                <div class="space-y-2">
-                  <div class="text-white/80 text-sm">پشتیبانی</div>
-                  <div class="text-2xl font-extrabold">24/7</div>
-                </div>
-                <div class="space-y-2">
-                  <div class="text-white/80 text-sm">خدمات</div>
-                  <div class="text-2xl font-extrabold">واردات تا نصب و نگهداری</div>
-                </div>
-              </div>
+              <ul class="space-y-3">
+                <li class="flex items-center justify-between rounded-xl bg-white/5 px-4 py-3 border border-white/10">
+                  <span class="text-white/80 text-sm">پوشش پروژه‌های صنعتی</span>
+                  <span class="text-2xl font-extrabold">۱۰–۳۰۰۰ کاوا</span>
+                </li>
+                <li class="flex items-center justify-between rounded-xl bg-white/5 px-4 py-3 border border-white/10">
+                  <span class="text-white/80 text-sm">گارانتی</span>
+                  <span class="text-2xl font-extrabold">۱ سال رسمی</span>
+                </li>
+                <li class="flex items-center justify-between rounded-xl bg-white/5 px-4 py-3 border border-white/10">
+                  <span class="text-white/80 text-sm">پشتیبانی</span>
+                  <span class="text-2xl font-extrabold">۲۴/۷</span>
+                </li>
+                <li class="flex items-center justify-between rounded-xl bg-white/5 px-4 py-3 border border-white/10">
+                  <span class="text-white/80 text-sm">خدمات</span>
+                  <span class="text-2xl font-extrabold">واردات، نصب، راه‌اندازی و نگهداری</span>
+                </li>
+              </ul>
             </div>
             <!-- EN -->
             <div class="lang en hidden">
-              <div class="grid grid-cols-2 gap-4">
-                <div class="space-y-2">
-                  <div class="text-white/80 text-sm">Industrial Projects</div>
-                  <div class="text-2xl font-extrabold">10–3000 kVA</div>
-                </div>
-                <div class="space-y-2">
-                  <div class="text-white/80 text-sm">Warranty</div>
-                  <div class="text-2xl font-extrabold">Official 1 year</div>
-                </div>
-                <div class="space-y-2">
-                  <div class="text-white/80 text-sm">Support</div>
-                  <div class="text-2xl font-extrabold">24/7</div>
-                </div>
-                <div class="space-y-2">
-                  <div class="text-white/80 text-sm">Services</div>
-                  <div class="text-2xl font-extrabold">Import → Install → Maintain</div>
-                </div>
-              </div>
+              <ul class="space-y-3">
+                <li class="flex items-center justify-between rounded-xl bg-white/5 px-4 py-3 border border-white/10">
+                  <span class="text-white/80 text-sm">Industrial Projects</span>
+                  <span class="text-2xl font-extrabold">10–3000 kVA</span>
+                </li>
+                <li class="flex items-center justify-between rounded-xl bg-white/5 px-4 py-3 border border-white/10">
+                  <span class="text-white/80 text-sm">Warranty</span>
+                  <span class="text-2xl font-extrabold">Official 1 year</span>
+                </li>
+                <li class="flex items-center justify-between rounded-xl bg-white/5 px-4 py-3 border border-white/10">
+                  <span class="text-white/80 text-sm">Support</span>
+                  <span class="text-2xl font-extrabold">24/7</span>
+                </li>
+                <li class="flex items-center justify-between rounded-xl bg-white/5 px-4 py-3 border border-white/10">
+                  <span class="text-white/80 text-sm">Services</span>
+                  <span class="text-2xl font-extrabold">Import → Install → Maintain</span>
+                </li>
+              </ul>
             </div>
             <!-- TR -->
             <div class="lang tr hidden">
-              <div class="grid grid-cols-2 gap-4">
-                <div class="space-y-2">
-                  <div class="text-white/80 text-sm">Endüstriyel Projeler</div>
-                  <div class="text-2xl font-extrabold">10–3000 kVA</div>
-                </div>
-                <div class="space-y-2">
-                  <div class="text-white/80 text-sm">Garanti</div>
-                  <div class="text-2xl font-extrabold">Resmi 1 yıl</div>
-                </div>
-                <div class="space-y-2">
-                  <div class="text-white/80 text-sm">Destek</div>
-                  <div class="text-2xl font-extrabold">7/24</div>
-                </div>
-                <div class="space-y-2">
-                  <div class="text-white/80 text-sm">Hizmetler</div>
-                  <div class="text-2xl font-extrabold">İthalat → Kurulum → Bakım</div>
-                </div>
-              </div>
+              <ul class="space-y-3">
+                <li class="flex items-center justify-between rounded-xl bg-white/5 px-4 py-3 border border-white/10">
+                  <span class="text-white/80 text-sm">Endüstriyel Projeler</span>
+                  <span class="text-2xl font-extrabold">10–3000 kVA</span>
+                </li>
+                <li class="flex items-center justify-between rounded-xl bg-white/5 px-4 py-3 border border-white/10">
+                  <span class="text-white/80 text-sm">Garanti</span>
+                  <span class="text-2xl font-extrabold">Resmi 1 yıl</span>
+                </li>
+                <li class="flex items-center justify-between rounded-xl bg-white/5 px-4 py-3 border border-white/10">
+                  <span class="text-white/80 text-sm">Destek</span>
+                  <span class="text-2xl font-extrabold">7/24</span>
+                </li>
+                <li class="flex items-center justify-between rounded-xl bg-white/5 px-4 py-3 border border-white/10">
+                  <span class="text-white/80 text-sm">Hizmetler</span>
+                  <span class="text-2xl font-extrabold">İthalat → Kurulum → Bakım</span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -311,7 +313,7 @@
               شرکت <strong>هرمس تجهیز راد</strong> فعالیت خود را از سال <strong>۱۳۹۶</strong> با هدف ارائه راهکارهای تخصصی در حوزه‌ی <strong>تأمین برق اضطراری و دائم</strong> آغاز کرد و امروز به عنوان <strong>نماینده انحصاری شرکت EMISAN ترکیه</strong> در ایران شناخته می‌شود. ما با تکیه بر دانش مهندسی به‌روز، تیم فنی چابک و شبکه‌ی خدمات پس از فروش گسترده، یکی از بازیگران اصلی بازار <strong>ژنراتورهای دیزلی و گازسوز</strong> هستیم.
             </p>
             <p class="mb-4">
-              تمرکز ما بر <strong>واردات، فروش، نصب و راه‌اندازی</strong> و همچنین <strong>خدمات پس از فروش تخصصی</strong> تجهیزات برق اضطراری است. سبد محصولات شامل ژنراتورهای <strong>دیزلی و گازسوز</strong> در بازه توان <strong>۱۰ تا ۳۰۰۰ kVA</strong> از برندهای معتبر جهانی نظیر <strong>Perkins، MTU، Cummins، Volvo Penta</strong> و <strong>EMISAN</strong> می‌باشد.
+              تمرکز ما بر <strong>واردات، فروش، نصب و راه‌اندازی</strong> و همچنین <strong>خدمات پس از فروش تخصصی</strong> تجهیزات برق اضطراری است. سبد محصولات شامل ژنراتورهای <strong>دیزلی و گازسوز</strong> در بازه توان <strong>۱۰ تا ۳۰۰۰ کاوا</strong> از برندهای معتبر جهانی نظیر <strong>Perkins، MTU، Cummins، Volvo Penta</strong> و <strong>EMISAN</strong> می‌باشد.
             </p>
             <p class="mb-4">
               حوزه‌های کاربردی محصولات ما گستره‌ی وسیعی را پوشش می‌دهد: <strong>صنایع بزرگ</strong>، <strong>بیمارستان‌ها و مراکز درمانی</strong>، <strong>ساختمان‌های تجاری</strong>، <strong>پروژه‌های ساختمانی و معدنی</strong>، <strong>کسب‌وکارهای کوچک و متوسط</strong> و حتی <strong>واحدهای مسکونی و ویلاها</strong>.
@@ -328,7 +330,7 @@
           </div>
         </div>
 
-        <!-- EN (expanded) -->
+        <!-- EN -->
         <div class="lang en hidden">
           <h2 class="text-3xl md:text-4xl font-extrabold mb-6">About Hermes Tajhiz Rad</h2>
           <div class="leading-8 text-white/90 text-justify">
@@ -353,7 +355,7 @@
           </div>
         </div>
 
-        <!-- TR (expanded) -->
+        <!-- TR -->
         <div class="lang tr hidden">
           <h2 class="text-3xl md:text-4xl font-extrabold mb-6">Hermes Tajhiz Rad Hakkında</h2>
           <div class="leading-8 text-white/90 text-justify">
@@ -380,7 +382,7 @@
       </div>
 
       <div class="fade">
-        <img src="assets/about.jpg" alt="Hermes Tajhiz Rad - EMISAN exclusive representative in Iran" class="w-full rounded-2xl shadow-card object-cover">
+        <img src="assets/about.jpg" alt="Hermes Tajhiz Rad - EMISAN exclusive representative in Iran" class="w-full rounded-2xl shadow-card object-cover" loading="lazy">
       </div>
     </div>
   </section>
@@ -388,9 +390,7 @@
   <!-- SERVICES -->
   <section id="services" class="py-24 bg-panel/70">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="lang fa">
-        <h2 class="text-3xl md:text-4xl font-extrabold mb-10">خدمات ما</h2>
-      </div>
+      <div class="lang fa"><h2 class="text-3xl md:text-4xl font-extrabold mb-10">خدمات ما</h2></div>
       <div class="lang en hidden"><h2 class="text-3xl md:text-4xl font-extrabold mb-10">Our Services</h2></div>
       <div class="lang tr hidden"><h2 class="text-3xl md:text-4xl font-extrabold mb-10">Hizmetlerimiz</h2></div>
 
@@ -428,13 +428,13 @@
     </div>
   </section>
 
-  <!-- PRODUCTS -->
+  <!-- PRODUCTS (with mini galleries like projects) -->
   <section id="products" class="py-24">
-    <div class="max-w-6xl mx:auto px-6 max-w-6xl mx-auto px-6"><!-- typo fix: keep one container -->
+    <div class="max-w-6xl mx-auto px-6">
       <div class="lang fa">
         <h2 class="text-3xl md:text-4xl font-extrabold mb-6">محصولات</h2>
         <p class="text-white/90 leading-8 mb-10 text-justify">
-          ژنراتورهای <strong>دیزلی و گازسوز</strong> ما در بازه <strong>10 تا 3000 kVA</strong> با گارانتی معتبر، نصب استاندارد و <strong>۱۰ سال خدمات پس از فروش</strong> ارائه می‌شوند.
+          ژنراتورهای <strong>دیزلی و گازسوز</strong> ما در بازه <strong>۱۰ تا ۳۰۰۰ کاوا</strong> با گارانتی معتبر، نصب استاندارد و <strong>۱۰ سال خدمات پس از فروش</strong> ارائه می‌شوند.
         </p>
       </div>
       <div class="lang en hidden">
@@ -447,8 +447,12 @@
       </div>
 
       <div class="grid md:grid-cols-3 gap-6">
+        <!-- Industrial Diesel - product gallery -->
         <article class="rounded-2xl overflow-hidden brand-strip shadow-glass fade">
-          <img src="assets/prod-industrial.jpg" alt="دیزل ژنراتور صنعتی" class="h-48 w-full object-cover">
+          <div class="g-stage h-48 w-full bg-black/30"
+               data-gallery
+               data-images="assets/industrial-1.jpg,assets/industrial-2.jpg,assets/industrial-3.jpg"
+               aria-label="گالری محصول دیزل صنعتی"></div>
           <div class="p-6">
             <h3 class="font-bold mb-2 lang fa">دیزل ژنراتور صنعتی</h3>
             <h3 class="font-bold mb-2 lang en hidden">Industrial Diesel Generators</h3>
@@ -457,8 +461,12 @@
           </div>
         </article>
 
+        <!-- Hospital Generators - product gallery -->
         <article class="rounded-2xl overflow-hidden brand-strip shadow-glass fade">
-          <img src="assets/prod-hospital.jpg" alt="ژنراتور بیمارستانی" class="h-48 w-full object-cover">
+          <div class="g-stage h-48 w-full bg-black/30"
+               data-gallery
+               data-images="assets/hospital-1.jpg,assets/hospital-2.jpg,assets/hospital-3.jpg"
+               aria-label=" دیزل ژنراتور بیمارستانی"></div>
           <div class="p-6">
             <h3 class="font-bold mb-2 lang fa">دیزل ژنراتور بیمارستانی</h3>
             <h3 class="font-bold mb-2 lang en hidden">Hospital Generators</h3>
@@ -467,8 +475,12 @@
           </div>
         </article>
 
+        <!-- Sync Controller - product gallery -->
         <article class="rounded-2xl overflow-hidden brand-strip shadow-glass fade">
-          <img src="assets/controller.jpg" alt="کنترلر" class="h-48 w-full object-cover">
+          <div class="g-stage h-48 w-full bg-black/30"
+               data-gallery
+               data-images="assets/controller-1.jpg,assets/controller-2.jpg"
+               aria-label=" کنترلر سنکرون"></div>
           <div class="p-6">
             <h3 class="font-bold mb-2 lang fa">کنترلر سنکرون</h3>
             <h3 class="font-bold mb-2 lang en hidden">Synchronization Controller</h3>
@@ -480,7 +492,499 @@
     </div>
   </section>
 
-  <!-- BRANDS (4-at-a-time, infinite loop) -->
+  <!-- PROJECTS -->
+  <section id="projects" class="py-24 bg-panel/70">
+    <div class="max-w-6xl mx-auto px-6">
+      <!-- Titles -->
+      <div class="lang fa">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-6">پروژه‌های اجرایی</h2>
+        <p class="text-white/90 leading-8 mb-8 text-justify">نمونه‌ای از پروژه‌های اجرا شده توسط شرکت هرمس تجهیز راد در سال های اخیر    .</p>
+      </div>
+      <div class="lang en hidden">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-6">Executed Projects</h2>
+        <p class="text-white/90 leading-8 mb-8 text-justify">Each card and modal includes a multi-image gallery with slide navigation.</p>
+      </div>
+      <div class="lang tr hidden">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-6">Gerçekleşen Projeler</h2>
+        <p class="text-white/90 leading-8 mb-8 text-justify">Her kart ve modal, çok görselli bir galeri ve ileri/geri gezinme içerir.</p>
+      </div>
+
+      <!-- Filters -->
+      <div class="flex flex-wrap items-center gap-2 mb-8">
+        <div class="lang fa flex flex-wrap gap-2">
+          <button class="filter-btn px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15 ring-offset-2" data-filter="all">همه</button>
+          <button class="filter-btn px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15 ring-offset-2" data-filter="industrial">صنعتی</button>
+          <button class="filter-btn px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15 ring-offset-2" data-filter="hospital">بیمارستانی</button>
+          <button class="filter-btn px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15 ring-offset-2" data-filter="commercial">تجاری</button>
+          <button class="filter-btn px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15 ring-offset-2" data-filter="residential">مسکونی</button>
+        </div>
+        <div class="lang en hidden flex flex-wrap gap-2">
+          <button class="filter-btn px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15" data-filter="all">All</button>
+          <button class="filter-btn px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15" data-filter="industrial">Industrial</button>
+          <button class="filter-btn px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15" data-filter="hospital">Hospital</button>
+          <button class="filter-btn px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15" data-filter="commercial">Commercial</button>
+          <button class="filter-btn px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15" data-filter="residential">Residential</button>
+        </div>
+        <div class="lang tr hidden flex flex-wrap gap-2">
+          <button class="filter-btn px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15" data-filter="all">Tümü</button>
+          <button class="filter-btn px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15" data-filter="industrial">Endüstriyel</button>
+          <button class="filter-btn px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15" data-filter="hospital">Hastane</button>
+          <button class="filter-btn px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15" data-filter="commercial">Ticari</button>
+          <button class="filter-btn px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15" data-filter="residential">Konut</button>
+        </div>
+      </div>
+
+      <!-- Cards -->
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Industrial -->
+        <article class="project-card rounded-2xl overflow-hidden brand-strip shadow-glass fade" data-cat="industrial">
+          <div class="g-stage h-48 w-full bg-black/30"
+               data-gallery
+               data-images="assets/azarbeton-plant2.jpg,assets/azarbeton-plant.jpg,assets/azarbeton-plant3.jpg"
+               aria-label="گالری صنعت بتن آذرسهند"></div>
+
+          <div class="p-6">
+            <div class="text-white/70 text-xs mb-2 flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4"></i> تبریز — ۱۴۰۴</div>
+            <h3 class="font-bold mb-2 lang fa">صنعت بتن آذرسهند — ۴۵۰ کاوا</h3>
+            <h3 class="font-bold mb-2 lang en hidden">SANAT BETON AZAR SAHAND — 450 kVA</h3>
+            <h3 class="font-bold mb-2 lang tr hidden">SANAT BETON AZAR SAHAND — 450 kVA</h3>
+            <ul class="text-white/90 text-sm space-y-1">
+              <li class="flex items-center gap-2"><i data-lucide="bolt" class="w-4 h-4 text-neonBlue"></i> Perkins 2206A-E13TAG3 / Maranello</li>
+              <li class="flex items-center gap-2"><i data-lucide="link" class="w-4 h-4 text-neonBlue"></i> تابلو ATS</li>
+            </ul>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="px-3 py-1 text-xs rounded-full bg-white/10 border border-white/10">کانوپی عایق صدا</span>
+              <span class="px-3 py-1 text-xs rounded-full bg-white/10 border border-white/10">ATS 3200A</span>
+            </div>
+            <button
+              class="open-modal mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15"
+              data-title="صنعت بتن آذرسهند — ۴۵۰ کاوا"
+              data-images="assets/azarbeton-plant2.jpg,assets/azarbeton-plant.jpg,assets/azarbeton-plant3.jpg"
+              data-desc="نصب ژنراتور ۴۵۰ کاوا، کابل‌کشی و تحویل آماده‌به‌کار.">
+              <i data-lucide="zoom-in" class="w-4 h-4"></i><span class="lang fa">جزئیات</span><span class="lang en hidden">Details</span><span class="lang tr hidden">Detay</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- Hospital -->
+        <article class="project-card rounded-2xl overflow-hidden brand-strip shadow-glass fade" data-cat="hospital">
+          <div class="g-stage h-48 w-full bg-black/30"
+               data-gallery
+               data-images="assets/danamehr-1.jpg,assets/danamehr-2.jpg,assets/danamehr-3.jpg"
+               aria-label="کلینیک دانا مهر - ۲۷۵ کاوا"></div>
+
+          <div class="p-6">
+            <div class="text-white/70 text-xs mb-2 flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4"></i> تبریز — ۱۴۰۲</div>
+            <h3 class="font-bold mb-2 lang fa">کلینیک دانا مهر — ۲۷۵ کاوا</h3>
+            <h3 class="font-bold mb-2 lang en hidden">Dana Mehr Clinic — 275 kVA</h3>
+            <h3 class="font-bold mb-2 lang tr hidden">Dana Mehr Clinic — 275 kVA</h3>
+            <ul class="text-white/90 text-sm space-y-1">
+              <li class="flex items-center gap-2"><i data-lucide="bolt" class="w-4 h-4 text-neonBlue"></i> Volvo Penta / Leroy Somer</li>
+              <li class="flex items-center gap-2"><i data-lucide="shield-check" class="w-4 h-4 text-neonBlue"></i> نصب، راه‌اندازی و نگهداری</li>
+            </ul>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="px-3 py-1 text-xs rounded-full bg-white/10 border border-white/10">کانوپی عایق صدا</span>
+              <span class="px-3 py-1 text-xs rounded-full bg-white/10 border border-white/10">ATS 3200A</span>
+            </div>
+            <button
+              class="open-modal mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15"
+              data-title="کلینیک دانا مهر — ۲۷۵ کاوا"
+              data-images="assets/danamehr-1.jpg,assets/danamehr-2.jpg,assets/danamehr-3.jpg"
+              data-desc="نصب ژنراتور ۲۷۵ کاوا، کابل‌کشی و تحویل آماده‌به‌کار.">
+              <i data-lucide="zoom-in" class="w-4 h-4"></i><span class="lang fa">جزئیات</span><span class="lang en hidden">Details</span><span class="lang tr hidden">Detay</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- Commercial -->
+        <article class="project-card rounded-2xl overflow-hidden brand-strip shadow-glass fade" data-cat="commercial">
+          <div class="g-stage h-48 w-full bg-black/30"
+               data-gallery
+               data-images="assets/mall.jpg,assets/mall-2.jpg"
+               aria-label="گالری پروژه مرکز خرید"></div>
+
+          <div class="p-6">
+            <div class="text-white/70 text-xs mb-2 flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4"></i> اصفهان — ۱۴۰۳</div>
+            <h3 class="font-bold mb-2 lang fa">مرکز خرید — ۶۳۰ کاوا</h3>
+            <h3 class="font-bold mb-2 lang en hidden">Shopping Mall — 630 kVA</h3>
+            <h3 class="font-bold mb-2 lang tr hidden">AVM — 630 kVA</h3>
+            <ul class="text-white/90 text-sm space-y-1">
+              <li class="flex items-center gap-2"><i data-lucide="bolt" class="w-4 h-4 text-neonBlue"></i> Cummins / Stamford</li>
+              <li class="flex items-center gap-2"><i data-lucide="factory" class="w-4 h-4 text-neonBlue"></i> تابلو توزیع و مانیتورینگ</li>
+            </ul>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="px-3 py-1 text-xs rounded-full bg-white/10 border border-white/10">کانوپی سایلنت</span>
+              <span class="px-3 py-1 text-xs rounded-full bg-white/10 border border-white/10">ATS 1600A</span>
+            </div>
+            <button class="open-modal mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15"
+              data-title="مرکز خرید — ۶۳۰ کاوا"
+              data-images="assets/mall.jpg,assets/mall-2.jpg"
+              data-desc="نصب و راه‌اندازی، تست بار و تحویل نهایی با آموزش اپراتور.">
+              <i data-lucide="zoom-in" class="w-4 h-4"></i><span class="lang fa">جزئیات</span><span class="lang en hidden">Details</span><span class="lang tr hidden">Detay</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- Residential -->
+        <article class="project-card rounded-2xl overflow-hidden brand-strip shadow-glass fade" data-cat="residential">
+          <div class="g-stage h-48 w-full bg-black/30"
+               data-gallery
+               data-images="assets/villa.jpg,assets/villa-2.jpg"
+               aria-label="گالری پروژه ویلا"></div>
+
+          <div class="p-6">
+            <div class="text-white/70 text-xs mb-2 flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4"></i> مازندران — ۱۴۰۲</div>
+            <h3 class="font-bold mb-2 lang fa">ویلا — ۸۰ کاوا (گازسوز)</h3>
+            <h3 class="font-bold mb-2 lang en hidden">Villa — 80 kVA (Gas)</h3>
+            <h3 class="font-bold mb-2 lang tr hidden">Villa — 80 kVA (Gaz)</h3>
+            <ul class="text-white/90 text-sm space-y-1">
+              <li class="flex items-center gap-2"><i data-lucide="bolt" class="w-4 h-4 text-neonBlue"></i> EMISAN / Mecc Alte</li>
+              <li class="flex items-center gap-2"><i data-lucide="leaf" class="w-4 h-4 text-neonBlue"></i> مصرف و صدای کم</li>
+            </ul>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="px-3 py-1 text-xs rounded-full bg-white/10 border border-white/10">راه‌اندازی سریع</span>
+              <span class="px-3 py-1 text-xs rounded-full bg-white/10 border border-white/10">حفاظت کامل</span>
+            </div>
+            <button class="open-modal mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15"
+              data-title="ویلا — ۸۰ کاوا (گازسوز)"
+              data-images="assets/projects/villa.jpg,assets/projects/villa-2.jpg"
+              data-desc="طراحی اقتصادی برای مصرف خانگی با نگهداری آسان و ظاهر جمع‌وجور.">
+              <i data-lucide="zoom-in" class="w-4 h-4"></i><span class="lang fa">جزئیات</span><span class="lang en hidden">Details</span><span class="lang tr hidden">Detay</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- Industrial 2 -->
+        <article class="project-card rounded-2xl overflow-hidden brand-strip shadow-glass fade" data-cat="industrial">
+          <div class="g-stage h-48 w-full bg-black/30"
+               data-gallery
+               data-images="assets/mine-1.jpg,assets/mine-2.jpg"
+               aria-label="گالری پروژه معدن"></div>
+
+          <div class="p-6">
+            <div class="text-white/70 text-xs mb-2 flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4"></i> تبریز — ۱۴۰۱</div>
+            <h3 class="font-bold mb-2 lang fa">معدن بناب — 2500 کاوا</h3>
+            <h3 class="font-bold mb-2 lang en hidden">Mine — 1000 kVA</h3>
+            <h3 class="font-bold mb-2 lang tr hidden">Maden — 1000 kVA</h3>
+            <ul class="text-white/90 text-sm space-y-1">
+              <li class="flex items-center gap-2"><i data-lucide="bolt" class="w-4 h-4 text-neonBlue"></i> MTU / Leroy Somer</li>
+              <li class="flex items-center gap-2"><i data-lucide="shield-check" class="w-4 h-4 text-neonBlue"></i> فیلترینگ گردوغبار</li>
+            </ul>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="px-3 py-1 text-xs rounded-full bg-white/10 border border-white/10">چادر محافظ</span>
+              <span class="px-3 py-1 text-xs rounded-full bg-white/10 border border-white/10">ATS 2500A</span>
+            </div>
+            <button class="open-modal mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15"
+              data-title="معدن — ۱۰۰۰ کاوا"
+              data-images="assets/projects/mine.jpg,assets/projects/mine-2.jpg"
+              data-desc="استقرار در محیط‌های سخت، برنامه سرویس دوره‌ای و آموزش تیم بهره‌بردار.">
+              <i data-lucide="zoom-in" class="w-4 h-4"></i><span class="lang fa">جزئیات</span><span class="lang en hidden">Details</span><span class="lang tr hidden">Detay</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- Commercial 2 -->
+        <article class="project-card rounded-2xl overflow-hidden brand-strip shadow-glass fade" data-cat="commercial">
+          <div class="g-stage h-48 w-full bg-black/30"
+               data-gallery
+               data-images="assets/hotel.jpg,assets/hotel-2.jpg"
+               aria-label="گالری پروژه هتل"></div>
+
+          <div class="p-6">
+            <div class="text-white/70 text-xs mb-2 flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4"></i> تبریز — ۱۴۰۰</div>
+            <h3 class="font-bold mb-2 lang fa">هتل — ۴۰۰ کاوا</h3>
+            <h3 class="font-bold mb-2 lang en hidden">Hotel — 400 kVA</h3>
+            <h3 class="font-bold mb-2 lang tr hidden">Otel — 400 kVA</h3>
+            <ul class="text-white/90 text-sm space-y-1">
+              <li class="flex items-center gap-2"><i data-lucide="bolt" class="w-4 h-4 text-neonBlue"></i> EMISAN / Stamford</li>
+              <li class="flex items-center gap-2"><i data-lucide="gauge" class="w-4 h-4 text-neonBlue"></i> مانیتورینگ انرژی</li>
+            </ul>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="px-3 py-1 text-xs rounded-full bg-white/10 border border-white/10">Noise <span class="latin">≤</span> 70 dB</span>
+              <span class="px-3 py-1 text-xs rounded-full bg-white/10 border border-white/10">AMF</span>
+            </div>
+            <button class="open-modal mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15"
+              data-title="هتل — ۴۰۰ کاوا"
+              data-images="assets/projects/hotel.jpg,assets/projects/hotel-2.jpg"
+              data-desc="طراحی کم‌صدا، نصب در فضای محدود و تحویل سریع.">
+              <i data-lucide="zoom-in" class="w-4 h-4"></i><span class="lang fa">جزئیات</span><span class="lang en hidden">Details</span><span class="lang tr hidden">Detay</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- ===================== ADDED PROJECTS (from your list) ===================== -->
+
+        <!-- شرکت شیشه قزوین -->
+        <article class="project-card rounded-2xl overflow-hidden brand-strip shadow-glass fade" data-cat="industrial">
+          <div class="g-stage h-48 w-full bg-black/30"
+               data-gallery
+               data-images="assets/industrial-4-4.jpg,assets/industrial-5-5.jpg"
+               aria-label="شرکت شیشه قزوین - تابلو سنکرون برای چهار دیزل ژنراتور"></div>
+          <div class="p-6">
+            <h3 class="font-bold mb-2 lang fa">شرکت شیشه قزوین — ۱۵۰۰ کاوا  </h3>
+            <h3 class="font-bold mb-2 lang en hidden">Qazvin Glass — 1500 kVA (4 Gens)</h3>
+            <ul class="text-white/90 text-sm space-y-1">
+              <li class="flex items-center gap-2"><i data-lucide="link" class="w-4 h-4 text-neonBlue"></i>  طراحی تابلو کنترل برای سنکرو ۴ دستگاه دیزل ژنراتور</li>
+            </ul>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="px-3 py-1 text-xs rounded-full bg-white/10 border border-white/10">سنکرون چنددستگاهی</span>
+            </div>
+            <button class="open-modal mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15"
+              data-title="شرکت شیشه قزوین — ۱۵۰۰ کاوا (۴ دستگاه)"
+              data-images="assets/industrial-4-4.jpg,assets/industrial-5-5.jpg"
+              data-desc="طراحی، نصب و راه‌اندازی تابلو کنترل سنکرون برای چهار دستگاه دیزل ژنراتور.">
+              <i data-lucide="zoom-in" class="w-4 h-4"></i><span class="lang fa">جزئیات</span><span class="lang en hidden">Details</span>
+            </button>
+          </div>
+        </article>
+        <!-- ===================== ADDED PROJECTS (from your list) ===================== -->
+
+        <!-- شرکت شیشه قزوین -->
+        <article class="project-card rounded-2xl overflow-hidden brand-strip shadow-glass fade" data-cat="industrial">
+          <div class="g-stage h-48 w-full bg-black/30"
+               data-gallery
+               data-images="assets/industrial-4-4.jpg,assets/industrial-5-5.jpg"
+               aria-label="شرکت شیشه قزوین - واردات و نصب و راه اندازی یک دستگاه دیزل ژنراتور کاترپیلار 2000 کاوا  "></div>
+          <div class="p-6">
+            <h3 class="font-bold mb-2 lang fa">شرکت شیشه قزوین — 2000 کاوا  </h3>
+            <h3 class="font-bold mb-2 lang en hidden">Qazvin Glass — 2000 kVA </h3>
+            <ul class="text-white/90 text-sm space-y-1">
+              <li class="flex items-center gap-2"><i data-lucide="link" class="w-4 h-4 text-neonBlue"></i>  واردات، نصب و راه اندازی یک دستگاه دیزل ژنراتور کاترپیلار 2000 کاوا</li>
+            </ul>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="px-3 py-1 text-xs rounded-full bg-white/10 border border-white/10">سنکرون چنددستگاهی</span>
+            </div>
+            <button class="open-modal mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15"
+              data-title="شرکت شیشه قزوین — 2000 کاوا (۴ دستگاه)"
+              data-images="assets/industrial-4-4.jpg,assets/industrial-5-5.jpg"
+              data-desc="طراحی، نصب و راه‌اندازی تابلو کنترل سنکرون برای چهار دستگاه دیزل ژنراتور.">
+              <i data-lucide="zoom-in" class="w-4 h-4"></i><span class="lang fa">جزئیات</span><span class="lang en hidden">Details</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- شرکت آسیا شور -->
+        <article class="project-card rounded-2xl overflow-hidden brand-strip shadow-glass fade" data-cat="industrial">
+          <div class="g-stage h-48 w-full bg-black/30" data-gallery
+               data-images="assets/industrial-2.jpg,assets/industrial-3.jpg"
+               aria-label="شرکت آسیا شور - 700 کاوا دوسان"></div>
+          <div class="p-6">
+            <h3 class="font-bold mb-2 lang fa">شرکت آسیا شور — ۷۰۰ کاوا</h3>
+            <h3 class="font-bold mb-2 lang en hidden">Asia Shour — 700 kVA</h3>
+            <ul class="text-white/90 text-sm space-y-1">
+              <li class="flex items-center gap-2"><i data-lucide="bolt" class="w-4 h-4 text-neonBlue"></i> Doosan</li>
+              <li class="flex items-center gap-2"><i data-lucide="link" class="w-4 h-4 text-neonBlue"></i> تابلو سنکرون با شبکه</li>
+            </ul>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="px-3 py-1 text-xs rounded-full bg-white/10 border border-white/10">تحویل آماده‌به‌کار</span>
+            </div>
+            <button class="open-modal mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15"
+              data-title="شرکت آسیا شور — ۷۰۰ کاوا"
+              data-images="assets/industrial-2.jpg,assets/industrial-3.jpg"
+              data-desc="تأمین، نصب و راه‌اندازی دیزل ژنراتور ۷۰۰ کاوا از برند دوسان به همراه تابلو سنکرون با شبکه.">
+              <i data-lucide="zoom-in" class="w-4 h-4"></i><span class="lang fa">جزئیات</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- شرکت آذر مهر هریس -->
+        <article class="project-card rounded-2xl overflow-hidden brand-strip shadow-glass fade" data-cat="industrial">
+          <div class="g-stage h-48 w-full bg-black/30" data-gallery
+               data-images="assets/industrial-3.jpg,assets/industrial-1.jpg"
+               aria-label="شرکت آذر مهر هریس - 2250 کاوا MTU"></div>
+        <div class="p-6">
+            <h3 class="font-bold mb-2 lang fa">شرکت آذر مهر هریس — ۲۲۵۰ کاوا</h3>
+            <h3 class="font-bold mb-2 lang en hidden">Azar Mehr Heris — 2250 kVA</h3>
+            <ul class="text-white/90 text-sm space-y-1">
+              <li class="flex items-center gap-2"><i data-lucide="bolt" class="w-4 h-4 text-neonBlue"></i> MTU</li>
+              <li class="flex items-center gap-2"><i data-lucide="link" class="w-4 h-4 text-neonBlue"></i> تابلو سنکرون مربوطه</li>
+            </ul>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="px-3 py-1 text-xs rounded-full bg-white/10 border border-white/10">سنکرون صنعتی</span>
+            </div>
+            <button class="open-modal mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15"
+              data-title="شرکت آذر مهر هریس — ۲۲۵۰ کاوا"
+              data-images="assets/industrial-3.jpg,assets/industrial-1.jpg"
+              data-desc="طراحی، تأمین، نصب و راه‌اندازی دیزل ژنراتور ۲۲۵۰ کاوا MTU به همراه تابلو سنکرون.">
+              <i data-lucide="zoom-in" class="w-4 h-4"></i><span class="lang fa">جزئیات</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- شرکت ترمه بافت آذر -->
+        <article class="project-card rounded-2xl overflow-hidden brand-strip shadow-glass fade" data-cat="industrial">
+          <div class="g-stage h-48 w-full bg-black/30" data-gallery
+               data-images="assets/industrial-1.jpg,assets/industrial-2.jpg"
+               aria-label="شرکت ترمه بافت آذر - 720 کاوا Perkins"></div>
+          <div class="p-6">
+            <h3 class="font-bold mb-2 lang fa">شرکت ترمه بافت آذر — ۷۲۰ کاوا</h3>
+            <h3 class="font-bold mb-2 lang en hidden">Termeh Baft Azar — 720 kVA</h3>
+            <ul class="text-white/90 text-sm space-y-1">
+              <li class="flex items-center gap-2"><i data-lucide="bolt" class="w-4 h-4 text-neonBlue"></i> Perkins</li>
+              <li class="flex items-center gap-2"><i data-lucide="link" class="w-4 h-4 text-neonBlue"></i> تابلو سنکرون</li>
+            </ul>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="px-3 py-1 text-xs rounded-full bg-white/10 border border-white/10">سنکرون با شبکه</span>
+            </div>
+            <button class="open-modal mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15"
+              data-title="شرکت ترمه بافت آذر — ۷۲۰ کاوا"
+              data-images="assets/industrial-1.jpg,assets/industrial-2.jpg"
+              data-desc="تأمین و اجرای ۷۲۰ کاوا پرکینز به همراه تابلو سنکرون.">
+              <i data-lucide="zoom-in" class="w-4 h-4"></i><span class="lang fa">جزئیات</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- شرکت توان فولاد نگین غرب -->
+        <article class="project-card rounded-2xl overflow-hidden brand-strip shadow-glass fade" data-cat="industrial">
+          <div class="g-stage h-48 w-full bg-black/30" data-gallery
+               data-images="assets/industrial-2.jpg,assets/industrial-3.jpg"
+               aria-label="توان فولاد نگین غرب - دو دستگاه 720 کاوا Perkins"></div>
+          <div class="p-6">
+            <h3 class="font-bold mb-2 lang fa">توان فولاد نگین غرب — ۲×۷۲۰ کاوا</h3>
+            <h3 class="font-bold mb-2 lang en hidden">Tavan Foolad Negin Gharb — 2×720 kVA</h3>
+            <ul class="text-white/90 text-sm space-y-1">
+              <li class="flex items-center gap-2"><i data-lucide="bolt" class="w-4 h-4 text-neonBlue"></i> Perkins/Leroy Somer (2 Unit)</li>
+              <li class="flex items-center gap-2"><i data-lucide="link" class="w-4 h-4 text-neonBlue"></i> تابلو سنکرون</li>
+            </ul>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="px-3 py-1 text-xs rounded-full bg-white/10 border border-white/10">دو دستگاه سنکرون</span>
+            </div>
+            <button class="open-modal mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15"
+              data-title="توان فولاد نگین غرب — ۲×۷۲۰ کاوا"
+              data-images="assets/industrial-2.jpg,assets/industrial-3.jpg"
+              data-desc="طراحی، تأمین، نصب و راه‌اندازی دو دستگاه ۷۲۰ کاوا پرکینز با تابلو سنکرون.">
+              <i data-lucide="zoom-in" class="w-4 h-4"></i><span class="lang fa">جزئیات</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- شرکت پترو ماد کیمیا -->
+        <article class="project-card rounded-2xl overflow-hidden brand-strip shadow-glass fade" data-cat="industrial">
+          <div class="g-stage h-48 w-full bg-black/30" data-gallery
+               data-images="assets/industrial-3.jpg,assets/industrial-1.jpg"
+               aria-label="پترو ماد کیمیا - 720 کاوا Perkins"></div>
+          <div class="p-6">
+            <h3 class="font-bold mb-2 lang fa">پترو ماد کیمیا — ۷۲۰ کاوا</h3>
+            <h3 class="font-bold mb-2 lang en hidden">Petro Mad Kimia — 720 kVA</h3>
+            <ul class="text-white/90 text-sm space-y-1">
+              <li class="flex items-center gap-2"><i data-lucide="bolt" class="w-4 h-4 text-neonBlue"></i> Perkins/Leroy Somer</li>
+            </ul>
+            <button class="open-modal mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15"
+              data-title="پترو ماد کیمیا — ۷۲۰ کاوا"
+              data-images="assets/industrial-3.jpg,assets/industrial-1.jpg"
+              data-desc="طراحی، نصب و راه‌اندازی دیزل ژنراتور ۷۲۰ کاوا پرکینز.">
+              <i data-lucide="zoom-in" class="w-4 h-4"></i><span class="lang fa">جزئیات</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- شرکت سپهر ورز -->
+        <article class="project-card rounded-2xl overflow-hidden brand-strip shadow-glass fade" data-cat="industrial">
+          <div class="g-stage h-48 w-full bg-black/30" data-gallery
+               data-images="assets/industrial-1.jpg,assets/industrial-2.jpg"
+               aria-label="سپهر ورز - 500 کاوا Perkins + سنکرون با شبکه"></div>
+          <div class="p-6">
+            <h3 class="font-bold mb-2 lang fa">سپهر ورز — ۵۰۰ کاوا</h3>
+            <h3 class="font-bold mb-2 lang en hidden">Sepehr Varz — 500 kVA</h3>
+            <ul class="text-white/90 text-sm space-y-1">
+              <li class="flex items-center gap-2"><i data-lucide="bolt" class="w-4 h-4 text-neonBlue"></i> Perkins/Leroy Somer</li>
+              <li class="flex items-center gap-2"><i data-lucide="link" class="w-4 h-4 text-neonBlue"></i> سنکرون با شبکه</li>
+            </ul>
+            <button class="open-modal mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15"
+              data-title="سپهر ورز — ۵۰۰ کاوا"
+              data-images="assets/industrial-1.jpg,assets/industrial-2.jpg"
+              data-desc="تأمین و اجرای ۵۰۰ کاوا پرکینز به همراه تابلو سنکرون با شبکه.">
+              <i data-lucide="zoom-in" class="w-4 h-4"></i><span class="lang fa">جزئیات</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- شرکت آیلار کنسرو -->
+        <article class="project-card rounded-2xl overflow-hidden brand-strip shadow-glass fade" data-cat="industrial">
+          <div class="g-stage h-48 w-full bg-black/30" data-gallery
+               data-images="assets/industrial-1-1.jpg,assets/industrial-2-2.jpg,assets/industrial-3-3.jpg"
+               aria-label="آیلار کنسرو - 1250 کاوا Perkins"></div>
+          <div class="p-6">
+            <h3 class="font-bold mb-2 lang fa">آیلار کنسرو — ۱۲۵۰ کاوا</h3>
+            <h3 class="font-bold mb-2 lang en hidden">Ailar Conserve — 1250 kVA</h3>
+            <ul class="text-white/90 text-sm space-y-1">
+              <li class="flex items-center gap-2"><i data-lucide="bolt" class="w-4 h-4 text-neonBlue"></i> Perkins/Leroy Somer</li>
+            </ul>
+            <button class="open-modal mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15"
+              data-title="آیلار کنسرو — ۱۲۵۰ کاوا"
+              data-images="assets/industrial-1-1.jpg,assets/industrial-2-2.jpg,assets/industrial-3-3.jpg"
+              data-desc="تأمین و نصب دیزل ژنراتور ۱۲۵۰ کاوا پرکینز.">
+              <i data-lucide="zoom-in" class="w-4 h-4"></i><span class="lang fa">جزئیات</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- شرکت کارتن‌سازی اطلس سلولز تبریز -->
+        <article class="project-card rounded-2xl overflow-hidden brand-strip shadow-glass fade" data-cat="industrial">
+          <div class="g-stage h-48 w-full bg-black/30" data-gallery
+               data-images="assets/industrial-3.jpg,assets/industrial-1.jpg"
+               aria-label="اطلس سلولز تبریز - 500 کاوا Perkins سنکرون با شبکه"></div>
+          <div class="p-6">
+            <h3 class="font-bold mb-2 lang fa">اطلس سلولز تبریز — ۵۰۰ کاوا</h3>
+            <h3 class="font-bold mb-2 lang en hidden">Atlas Cellulose Tabriz — 500 kVA</h3>
+            <ul class="text-white/90 text-sm space-y-1">
+              <li class="flex items-center gap-2"><i data-lucide="bolt" class="w-4 h-4 text-neonBlue"></i> Perkins/Leroy Somer</li>
+              <li class="flex items-center gap-2"><i data-lucide="link" class="w-4 h-4 text-neonBlue"></i> سنکرون با شبکه</li>
+            </ul>
+            <button class="open-modal mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15"
+              data-title="اطلس سلولز تبریز — ۵۰۰ کاوا"
+              data-images="assets/industrial-3.jpg,assets/industrial-1.jpg"
+              data-desc="طراحی و اجرای ۵۰۰ کاوا پرکینز با تابلو سنکرون با شبکه.">
+              <i data-lucide="zoom-in" class="w-4 h-4"></i><span class="lang fa">جزئیات</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- شرکت آذران چوب کیمیا -->
+        <article class="project-card rounded-2xl overflow-hidden brand-strip shadow-glass fade" data-cat="industrial">
+          <div class="g-stage h-48 w-full bg-black/30" data-gallery
+               data-images="assets/industrial-1.jpg,assets/industrial-2.jpg"
+               aria-label="آذران چوب کیمیا - 400 کاوا Perkins"></div>
+          <div class="p-6">
+            <h3 class="font-bold mb-2 lang fa">آذران چوب کیمیا — ۴۰۰ کاوا</h3>
+            <h3 class="font-bold mb-2 lang en hidden">Azaran Choob Kimia — 400 kVA</h3>
+            <ul class="text-white/90 text-sm space-y-1">
+              <li class="flex items-center gap-2"><i data-lucide="bolt" class="w-4 h-4 text-neonBlue"></i> Perkins/Leroy Somer</li>
+            </ul>
+            <button class="open-modal mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg font-bold bg-white/10 border border-white/10 hover:bg-white/15"
+              data-title="آذران چوب کیمیا — ۴۰۰ کاوا"
+              data-images="assets/industrial-1.jpg,assets/industrial-2.jpg"
+              data-desc="تأمین و راه‌اندازی دیزل ژنراتور ۴۰۰ کاوا پرکینز.">
+              <i data-lucide="zoom-in" class="w-4 h-4"></i><span class="lang fa">جزئیات</span>
+            </button>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- Modal (with gallery) -->
+    <div id="projModal" class="fixed inset-0 z-[60] hidden" role="dialog" aria-modal="true">
+      <div class="absolute inset-0 bg-black/70" aria-hidden="true"></div>
+      <div class="relative z-10 max-w-4xl mx-auto mt-12 bg-panel/90 border border-white/10 rounded-2xl overflow-hidden shadow-card">
+        <div class="flex items-center justify-between px-6 py-4 border-b border-white/10">
+          <h3 id="projTitle" class="font-extrabold text-lg"></h3>
+          <button id="projClose" class="p-2 rounded-lg bg-white/10 hover:bg-white/15" aria-label="Close"><i data-lucide="x" class="w-5 h-5"></i></button>
+        </div>
+        <div class="relative">
+          <div id="modalStage" class="g-stage h-[56vh] min-h-[320px] bg-black/40"></div>
+          <button id="modalPrev" class="absolute top-1/2 -translate-y-1/2 right-3 md:right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur" aria-label="قبلی"><i data-lucide="chevron-right" class="w-6 h-6"></i></button>
+          <button id="modalNext" class="absolute top-1/2 -translate-y-1/2 left-3 md:left-4 p-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur" aria-label="بعدی"><i data-lucide="chevron-left" class="w-6 h-6"></i></button>
+          <div id="modalDots" class="absolute bottom-3 left-0 right-0 flex justify-center gap-2"></div>
+        </div>
+        <div class="px-6 py-4 border-t border-white/10">
+          <p id="projDesc" class="text-white/90 leading-8"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRANDS -->
   <section id="brands" class="py-20">
     <div class="max-w-6xl mx-auto px-6">
       <div class="lang fa"><h2 class="text-3xl md:text-4xl font-extrabold mb-5">برندهای مورد اعتماد ما</h2></div>
@@ -490,15 +994,15 @@
       <div class="brand-strip p-4">
         <div id="brandViewport" class="brand-viewport">
           <ul id="brandTrack" class="brand-track" dir="ltr" style="--brand-gap: 3.5rem;">
-            <li class="brand-item"><img class="brand-logo" src="assets/cummins.png" alt="Cummins"></li>
-            <li class="brand-item"><img class="brand-logo" src="assets/doosan.png"  alt="Doosan"></li>
-            <li class="brand-item"><img class="brand-logo" src="assets/perkins.png" alt="Perkins"></li>
-            <li class="brand-item"><img class="brand-logo" src="assets/mtu.png"     alt="MTU"></li>
-            <li class="brand-item"><img class="brand-logo" src="assets/cat.png"     alt="CAT"></li>
-            <li class="brand-item"><img class="brand-logo" src="assets/abb.png"     alt="ABB"></li>
+            <li class="brand-item"><img class="brand-logo" src="assets/cummins.png" alt="Cummins" loading="lazy"></li>
+            <li class="brand-item"><img class="brand-logo" src="assets/doosan.png"  alt="Doosan" loading="lazy"></li>
+            <li class="brand-item"><img class="brand-logo" src="assets/perkins.png" alt="Perkins" loading="lazy"></li>
+            <li class="brand-item"><img class="brand-logo" src="assets/mtu.png"     alt="MTU" loading="lazy"></li>
+            <li class="brand-item"><img class="brand-logo" src="assets/cat.png"     alt="CAT" loading="lazy"></li>
+            <li class="brand-item"><img class="brand-logo" src="assets/abb.png"     alt="ABB" loading="lazy"></li>
           </ul>
         </div>
-        <div id="brandDots" class="mt-4 flex justify-center gap-2"></div>
+        <div id="brandDots" class="mt-4 flex justify-center gap-2" aria-label="Brand slides"></div>
       </div>
     </div>
   </section>
@@ -548,7 +1052,11 @@
         <!-- FA -->
         <div class="lang fa">
           <h2 class="text-3xl md:text-4xl font-extrabold mb-6">تماس با ما</h2>
-          <p class="text-white/90 leading-8 mb-6">📞 04133248543 | 📧 info@htr.co.ir | 📷 اینستاگرام: htr.co.ir</p>
+          <p class="text-white/90 leading-8 mb-6">
+            📞 <a class="underline hover:text-neonBlue" href="tel:+984133248543">۰۴۱۳۳۲۴۸۵۴۳</a><br>
+            📧 <a class="underline hover:text-neonBlue keep-ltr" href="mailto:info@htr.co.ir"><bdi dir="ltr">info@htr.co.ir</bdi></a>&lrm;<br>
+            📷 اینستاگرام: <a class="underline hover:text-neonBlue keep-ltr" href="https://instagram.com/htr.co.ir" target="_blank" rel="noopener">htr.co.ir</a>&lrm;
+          </p>
           <div class="brand-strip p-6">
             <h3 class="font-bold mb-2">ساعات پاسخگویی</h3>
             <p class="text-white/90 leading-7">شنبه تا چهارشنبه ۹–۱۷ | پنجشنبه ۹–۱۳</p>
@@ -558,7 +1066,11 @@
         <!-- EN -->
         <div class="lang en hidden">
           <h2 class="text-3xl md:text-4xl font-extrabold mb-6">Contact Us</h2>
-          <p class="text-white/90 leading-8 mb-6">📞 +98 41 3324 8543 | 📧 info@htr.co.ir | 📷 Instagram: htr.co.ir</p>
+          <p class="text-white/90 leading-8 mb-6">
+            📞 <a class="underline hover:text-neonBlue keep-ltr" href="tel:+984133248543">+98 41 3324 8543</a>&lrm;<br>
+            📧 <a class="underline hover:text-neonBlue keep-ltr" href="mailto:info@htr.co.ir"><bdi dir="ltr">info@htr.co.ir</bdi></a>&lrm;<br>
+            📷 Instagram: <a class="underline hover:text-neonBlue keep-ltr" href="https://instagram.com/htr.co.ir" target="_blank" rel="noopener">htr.co.ir</a>&lrm;
+          </p>
           <div class="brand-strip p-6">
             <h3 class="font-bold mb-2">Working Hours</h3>
             <p class="text-white/90 leading-7">Sat–Wed 9:00–17:00 | Thu 9:00–13:00</p>
@@ -568,7 +1080,11 @@
         <!-- TR -->
         <div class="lang tr hidden">
           <h2 class="text-3xl md:text-4xl font-extrabold mb-6">İletişim</h2>
-          <p class="text-white/90 leading-8 mb-6">📞 +98 41 3324 8543 | 📧 info@htr.co.ir | 📷 Instagram: htr.co.ir</p>
+          <p class="text-white/90 leading-8 mb-6">
+            📞 <a class="underline hover:text-neonBlue keep-ltr" href="tel:+984133248543">+98 41 3324 8543</a>&lrm;<br>
+            📧 <a class="underline hover:text-neonBlue keep-ltr" href="mailto:info@htr.co.ir"><bdi dir="ltr">info@htr.co.ir</bdi></a>&lrm;<br>
+            📷 Instagram: <a class="underline hover:text-neonBlue keep-ltr" href="https://instagram.com/htr.co.ir" target="_blank" rel="noopener">htr.co.ir</a>&lrm;
+          </p>
           <div class="brand-strip p-6">
             <h3 class="font-bold mb-2">Çalışma Saatleri</h3>
             <p class="text-white/90 leading-7">Cumartesi–Çarşamba 9:00–17:00 | Perşembe 9:00–13:00</p>
@@ -576,35 +1092,36 @@
         </div>
       </div>
 
-      <form class="brand-strip p-8 shadow-glass fade">
+      <!-- Simple mailto form (بدون بک‌اند) -->
+      <form class="brand-strip p-8 shadow-glass fade" action="mailto:info@htr.co.ir" method="post" enctype="text/plain">
         <!-- FA -->
         <div class="lang fa">
           <div class="grid gap-4 mb-4">
-            <input class="bg-white text-ink rounded-lg px-4 py-3" placeholder="نام و نام خانوادگی" type="text">
-            <input class="bg-white text-ink rounded-lg px-4 py-3" placeholder="ایمیل" type="email">
-            <textarea class="bg-white text-ink rounded-lg px-4 py-3 h-32" placeholder="پیام شما"></textarea>
+            <input class="bg-white text-ink rounded-lg px-4 py-3" placeholder="نام و نام خانوادگی" name="name" type="text" required>
+            <input class="bg-white text-ink rounded-lg px-4 py-3" placeholder="ایمیل" name="email" type="email" required>
+            <textarea class="bg-white text-ink rounded-lg px-4 py-3 h-32" placeholder="پیام شما" name="message" required></textarea>
           </div>
-          <button class="gradient-cta from-neonBlue to-neonPurple text-white px-6 py-3 rounded-lg font-bold hover:shadow-lg">ارسال پیام</button>
+          <button class="gradient-cta text-white px-6 py-3 rounded-lg font-bold hover:shadow-lg">ارسال پیام</button>
         </div>
 
         <!-- EN -->
         <div class="lang en hidden">
           <div class="grid gap-4 mb-4">
-            <input class="bg-white text-ink rounded-lg px-4 py-3" placeholder="Full Name" type="text">
-            <input class="bg-white text-ink rounded-lg px-4 py-3" placeholder="Email" type="email">
-            <textarea class="bg-white text-ink rounded-lg px-4 py-3 h-32" placeholder="Your Message"></textarea>
+            <input class="bg-white text-ink rounded-lg px-4 py-3" placeholder="Full Name" name="name" type="text" required>
+            <input class="bg-white text-ink rounded-lg px-4 py-3" placeholder="Email" name="email" type="email" required>
+            <textarea class="bg-white text-ink rounded-lg px-4 py-3 h-32" placeholder="Your Message" name="message" required></textarea>
           </div>
-          <button class="gradient-cta from-neonBlue to-neonPurple text-white px-6 py-3 rounded-lg font-bold hover:shadow-lg">Send Message</button>
+          <button class="gradient-cta text-white px-6 py-3 rounded-lg font-bold hover:shadow-lg">Send Message</button>
         </div>
 
         <!-- TR -->
         <div class="lang tr hidden">
           <div class="grid gap-4 mb-4">
-            <input class="bg-white text-ink rounded-lg px-4 py-3" placeholder="Ad Soyad" type="text">
-            <input class="bg-white text-ink rounded-lg px-4 py-3" placeholder="E-posta" type="email">
-            <textarea class="bg-white text-ink rounded-lg px-4 py-3 h-32" placeholder="Mesajınız"></textarea>
+            <input class="bg-white text-ink rounded-lg px-4 py-3" placeholder="Ad Soyad" name="name" type="text" required>
+            <input class="bg-white text-ink rounded-lg px-4 py-3" placeholder="E-posta" name="email" type="email" required>
+            <textarea class="bg-white text-ink rounded-lg px-4 py-3 h-32" placeholder="Mesajınız" name="message" required></textarea>
           </div>
-          <button class="gradient-cta from-neonBlue to-neonPurple text-white px-6 py-3 rounded-lg font-bold hover:shadow-lg">Mesaj Gönder</button>
+          <button class="gradient-cta text-white px-6 py-3 rounded-lg font-bold hover:shadow-lg">Mesaj Gönder</button>
         </div>
       </form>
     </div>
@@ -623,6 +1140,7 @@
           <h5 class="font-bold mb-3">دسترسی سریع</h5>
           <ul class="text-white/80 text-sm space-y-2">
             <li><a href="#products" class="hover:text-neonBlue">محصولات</a></li>
+            <li><a href="#projects" class="hover:text-neonBlue">پروژه‌های اجرایی</a></li>
             <li><a href="#brands" class="hover:text-neonBlue">برندها</a></li>
             <li><a href="#blog" class="hover:text-neonBlue">بلاگ</a></li>
             <li><a href="#contact" class="hover:text-neonBlue">تماس</a></li>
@@ -639,10 +1157,12 @@
         <div class="fade">
           <h5 class="font-bold mb-3">ارتباط</h5>
           <ul class="text-white/80 text-sm space-y-2">
-            <li> 📞 04133248543 , 09144121572</li>
-            <li> 📞 09142158270 , 09146664717</li>
-            <li> 📧 info@htr.co.ir</li>
-            <li> 📍 ایران - تبریز - برج شهر - طبقه 9</li>
+            <li>📞 <a class="underline hover:text-neonBlue" href="tel:+984133248543">۰۴۱۳۳۲۴۸۵۴۳</a></li>
+            <li>📞 <a class="underline hover:text-neonBlue" href="tel:+989144121572">۰۹۱۴۴۱۲۱۵۷۲</a></li>
+            <li>📞 <a class="underline hover:text-neonBlue" href="tel:+989142158270">۰۹۱۴۲۱۵۸۲۷۰</a></li>
+            <li>📞 <a class="underline hover:text-neonBlue" href="tel:+989146664717">۰۹۱۴۶۶۶۴۷۱۷</a></li>
+            <li>📧 <a class="underline hover:text-neonBlue keep-ltr" href="mailto:info@htr.co.ir"><bdi dir="ltr">info@htr.co.ir</bdi></a>&lrm;</li>
+            <li>📍 ایران - تبریز - برج شهر - طبقه ۹</li>
           </ul>
         </div>
       </div>
@@ -657,6 +1177,7 @@
           <h5 class="font-bold mb-3">Quick Links</h5>
           <ul class="text-white/80 text-sm space-y-2">
             <li><a href="#products" class="hover:text-neonBlue">Products</a></li>
+            <li><a href="#projects" class="hover:text-neonBlue">Projects</a></li>
             <li><a href="#brands" class="hover:text-neonBlue">Brands</a></li>
             <li><a href="#blog" class="hover:text-neonBlue">Blog</a></li>
             <li><a href="#contact" class="hover:text-neonBlue">Contact</a></li>
@@ -673,9 +1194,11 @@
         <div class="fade">
           <h5 class="font-bold mb-3">Contact</h5>
           <ul class="text-white/80 text-sm space-y-2">
-            <li>📞 +98 413 324 8543 , +914 412 1572,</li>
-            <li>📞 +914 215 8270, +914 666 4717,</li>
-            <li>📧 info@htr.co.ir</li>
+            <li>📞 <a class="underline hover:text-neonBlue keep-ltr" href="tel:+984133248543">+98 413 324 8543</a>&lrm;</li>
+            <li>📞 <a class="underline hover:text-neonBlue keep-ltr" href="tel:+989144121572">+914 412 1572</a>&lrm;</li>
+            <li>📞 <a class="underline hover:text-neonBlue keep-ltr" href="tel:+989142158270">+914 215 8270</a>&lrm;</li>
+            <li>📞 <a class="underline hover:text-neonBlue keep-ltr" href="tel:+989146664717">+914 666 4717</a>&lrm;</li>
+            <li>📧 <a class="underline hover:text-neonBlue keep-ltr" href="mailto:info@htr.co.ir"><bdi dir="ltr">info@htr.co.ir</bdi></a>&lrm;</li>
             <li>📍 Iran - Tabriz - Shahr Tower - 9th Floor</li>
           </ul>
         </div>
@@ -691,6 +1214,7 @@
           <h5 class="font-bold mb-3">Hızlı Erişim</h5>
           <ul class="text-white/80 text-sm space-y-2">
             <li><a href="#products" class="hover:text-neonBlue">Ürünler</a></li>
+            <li><a href="#projects" class="hover:text-neonBlue">Projeler</a></li>
             <li><a href="#brands" class="hover:text-neonBlue">Markalar</a></li>
             <li><a href="#blog" class="hover:text-neonBlue">Blog</a></li>
             <li><a href="#contact" class="hover:text-neonBlue">İletişim</a></li>
@@ -707,17 +1231,19 @@
         <div class="fade">
           <h5 class="font-bold mb-3">İletişim</h5>
           <ul class="text-white/80 text-sm space-y-2">
-            <li>📞 +98 41 3324 8543 , +914 412 1572,</li>
-            <li>📞 +914 215 8270, + 914 666 4717,</li>
-            <li>📧 info@htr.co.ir</li>
-            <li>📍 İran - Tebriz - Shahr Tower - 9. Kat</li>
+            <li>📞 <a class="underline hover:text-neonBlue keep-ltr" href="tel:+984133248543">+98 41 3324 8543</a>&lrm;</li>
+            <li>📞 <a class="underline hover:text-neonBlue keep-ltr" href="tel:+989144121572">+914 412 1572</a>&lrm;</li>
+            <li>📞 <a class="underline hover:text-neonBlue keep-ltr" href="tel:+989142158270">+914 215 8270</a>&lrm;</li>
+            <li>📞 <a class="underline hover:text-neonBlue keep-ltr" href="tel:+989146664717">+ 914 666 4717</a>&lrm;</li>
+            <li>📧 <a class="underline hover:text-neonBlue keep-ltr" href="mailto:info@htr.co.ir"><bdi dir="ltr">info@htr.co.ir</bdi></a>&lrm;</li>
+            <li>📍 İran - Tebریز - Shahr Tower - 9. Kat</li>
           </ul>
         </div>
       </div>
     </div>
 
     <div class="text-center py-4 text-white/70 text-sm border-t border-white/10">
-      <div class="lang fa">© 2025 هرمس تجهیز راد | طراحی و سئو توسط <strong>سودا نوبریان</strong></div>
+      <div class="lang fa">© ۲۰۲۵ هرمس تجهیز راد | طراحی و سئو توسط <strong>سودا نوبریان</strong></div>
       <div class="lang en hidden">© 2025 Hermes Tajhiz Rad | Design & SEO by <strong>Sevda Nobarian</strong></div>
       <div class="lang tr hidden">© 2025 Hermes Tajhiz Rad | Tasarım & SEO: <strong>Sevda Nobarian</strong></div>
     </div>
@@ -725,10 +1251,10 @@
 
   <!-- Scripts -->
   <script>
-    // icons
-    lucide.createIcons();
+    // Init icons after DOM ready
+    document.addEventListener('DOMContentLoaded', () => { if (window.lucide) lucide.createIcons(); });
 
-    // header blur on scroll
+    // header blur on scroll (kept for effect)
     const header = document.getElementById('siteHeader');
     function setHeader(){ header.classList.add('nav-blur'); }
     setHeader(); window.addEventListener('scroll', setHeader);
@@ -740,15 +1266,13 @@
 
     function applyLang(lang) {
       if (!SUPPORTED.includes(lang)) lang = DEFAULT_LANG;
-      // Toggle all .lang blocks
       document.querySelectorAll('.lang').forEach(el => el.classList.add('hidden'));
       document.querySelectorAll('.lang.' + lang).forEach(el => el.classList.remove('hidden'));
-      // Set html attrs
       document.documentElement.lang = lang;
       document.documentElement.dir  = (lang === 'fa') ? 'rtl' : 'ltr';
-      // Persist & reflect in select
       localStorage.setItem('htr_lang', lang);
       if (selectEl) selectEl.value = lang;
+      if (lang === 'fa') localizeFaNumbersAndUnits();
     }
     const savedLang = localStorage.getItem('htr_lang') || DEFAULT_LANG;
     applyLang(savedLang);
@@ -763,22 +1287,21 @@
     const io = new IntersectionObserver((ents)=>ents.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); }), {threshold:.18});
     document.querySelectorAll('.fade').forEach(el=>io.observe(el));
 
-    // ====== BRAND CAROUSEL (4 at a time, infinite) ======
+    // ====== BRAND CAROUSEL ======
     (function(){
       const viewport = document.getElementById('brandViewport');
       const track    = document.getElementById('brandTrack');
       const dotsWrap = document.getElementById('brandDots');
-      const SPEED_MS = 2200;   // هر چند میلی‌ثانیه یک اسلاید
-      const STEP     = 1;      // هر بار چند آیتم بره جلو
+      const SPEED_MS = 2200;
+      const STEP     = 1;
 
-      // اطمینان از جهت LTR فقط برای این اسلایدر (حل مشکل در زبان فارسی)
-      track.setAttribute('dir','ltr');
+      track?.setAttribute('dir','ltr');
       if (viewport) viewport.style.direction = 'ltr';
+      if (!track || !viewport) return;
 
       let items = Array.from(track.children);
       const N = items.length;
 
-      // کلون: اول و آخر، به تعداد visible (۴ یا ۳ در موبایل)
       const isMobile = window.matchMedia('(max-width:768px)').matches;
       const visible = isMobile ? 3 : 4;
       const prepend = items.slice(-visible).map(n=>n.cloneNode(true));
@@ -786,10 +1309,7 @@
       prepend.forEach(n=>track.insertBefore(n, track.firstChild));
       append.forEach(n=>track.appendChild(n));
 
-      // بعد از کلون، دوباره لیست کن
       items = Array.from(track.children);
-
-      // محاسبه گپ
       const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
 
       function itemWidth(){
@@ -797,20 +1317,18 @@
         return one + gap;
       }
 
-      // نقطه‌ها
-      const dotCount = N; // به ازای آیتم‌های اصلی
       const dots = [];
-      for(let i=0;i<dotCount;i++){
+      for(let i=0;i<N;i++){
         const d = document.createElement('span');
         d.className = 'dot';
+        d.setAttribute('role','button');
+        d.setAttribute('tabindex','0');
         dotsWrap.appendChild(d);
         dots.push(d);
       }
-      function paintDots(realIdx){
-        dots.forEach((d, j)=> d.classList.toggle('active', j===realIdx));
-      }
+      function paintDots(realIdx){ dots.forEach((d, j)=> d.classList.toggle('active', j===realIdx)); }
 
-      let index = visible; // به خاطر prepend
+      let index = visible;
       let x = -index * itemWidth();
       track.style.transform = `translateX(${x}px)`;
 
@@ -820,14 +1338,11 @@
         x = -index * itemWidth();
         track.style.transition = 'transform .6s ease';
         track.style.transform  = `translateX(${x}px)`;
-
-        // هایلایت نقطه
         const real = (index - visible + N) % N;
         paintDots(real);
       }
 
       track.addEventListener('transitionend', ()=>{
-        // اگر به کلون‌ها رسیدیم، بدون انیمیشن برگرد وسط
         if(index >= N + visible){
           index = visible;
           x = -index * itemWidth();
@@ -847,22 +1362,234 @@
       viewport.addEventListener('mouseenter', stop);
       viewport.addEventListener('mouseleave', play);
 
-      // کلیک روی دات‌ها
-      dots.forEach((d, j)=> d.addEventListener('click', ()=>{
-        const target = j + visible;
-        go(target);
-      }));
+      dots.forEach((d, j)=> d.addEventListener('click', ()=>{ const target = j + visible; go(target); }));
+      paintDots(0); play();
 
-      paintDots(0);
-      play();
-
-      // ریسایز: تصحیح موقعیت
       window.addEventListener('resize', ()=>{
         track.style.transition = 'none';
         x = -index * itemWidth();
         track.style.transform  = `translateX(${x}px)`;
       });
     })();
+
+    // ====== GENERIC GALLERY for any [data-gallery] (Products + Project cards) ======
+    function createGallery(stageEl, images) {
+      stageEl.innerHTML = '';
+      stageEl.classList.add('rounded-xl','overflow-hidden');
+
+      // slides
+      images.forEach((src, i) => {
+        const img = document.createElement('img');
+        img.src = src.trim();
+        img.alt = stageEl.getAttribute('aria-label') || `image ${i+1}`;
+        img.loading = 'lazy';
+        img.className = 'g-slide' + (i===0 ? ' active' : '');
+        stageEl.appendChild(img);
+      });
+
+      if (images.length <= 1) return;
+
+      // arrows
+      const btnPrev = document.createElement('button');
+      btnPrev.className = 'absolute top-1/2 -translate-y-1/2 right-2 md:right-3 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center backdrop-blur';
+      btnPrev.innerHTML = '<i data-lucide="chevron-right" class="w-5 h-5"></i>';
+
+      const btnNext = document.createElement('button');
+      btnNext.className = 'absolute top-1/2 -translate-y-1/2 left-2 md:left-3 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center backdrop-blur';
+      btnNext.innerHTML = '<i data-lucide="chevron-left" class="w-5 h-5"></i>';
+
+      // dots
+      const dotsWrap = document.createElement('div');
+      dotsWrap.className = 'absolute bottom-2 left-0 right-0 flex justify-center gap-2';
+      const dots = images.map((_, i) => {
+        const d = document.createElement('span');
+        d.className = 'g-dot' + (i===0 ? ' active' : '');
+        d.style.cursor = 'pointer';
+        dotsWrap.appendChild(d);
+        d.addEventListener('click', () => go(i));
+        return d;
+      });
+
+      stageEl.appendChild(btnPrev);
+      stageEl.appendChild(btnNext);
+      stageEl.appendChild(dotsWrap);
+
+      let idx = 0;
+      const slides = Array.from(stageEl.querySelectorAll('.g-slide'));
+
+      function paint() {
+        slides.forEach((s, i) => s.classList.toggle('active', i===idx));
+        dots.forEach((d, i) => d.classList.toggle('active', i===idx));
+        if (window.lucide) lucide.createIcons();
+      }
+      function go(n) {
+        idx = (n + slides.length) % slides.length;
+        paint();
+      }
+      btnPrev.addEventListener('click', () => go(idx - 1));
+      btnNext.addEventListener('click', () => go(idx + 1));
+
+      // touch swipe
+      let startX = null;
+      stageEl.addEventListener('touchstart', (e)=>{ startX = e.touches[0].clientX; }, {passive:true});
+      stageEl.addEventListener('touchend', (e)=>{
+        if(startX===null) return;
+        const dx = e.changedTouches[0].clientX - startX;
+        if(Math.abs(dx) > 40){ dx > 0 ? go(idx - 1) : go(idx + 1); }
+        startX = null;
+      });
+    }
+
+    // init all galleries
+    document.querySelectorAll('[data-gallery]').forEach(stage => {
+      const imgs = (stage.getAttribute('data-images') || '').split(',').map(s=>s.trim()).filter(Boolean);
+      createGallery(stage, imgs);
+    });
+
+    // ====== PROJECTS FILTERS ======
+    (function(){
+      const btns = document.querySelectorAll('.filter-btn');
+      const cards = document.querySelectorAll('.project-card');
+      function setActive(btn){
+        btns.forEach(b=>b.classList.remove('ring-2','ring-neonBlue'));
+        btn.classList.add('ring-2','ring-neonBlue');
+      }
+      function filter(cat){
+        cards.forEach(c=>{
+          const ok = (cat==='all') || (c.dataset.cat===cat);
+          c.style.display = ok ? '' : 'none';
+        });
+      }
+      btns.forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          setActive(btn);
+          filter(btn.dataset.filter);
+        });
+      });
+      const first = document.querySelector('.filter-btn[data-filter="all"]');
+      if(first){ setActive(first); filter('all'); }
+    })();
+
+    // ====== PROJECT MODAL ======
+    (function(){
+      const modal = document.getElementById('projModal');
+      const title = document.getElementById('projTitle');
+      const desc  = document.getElementById('projDesc');
+      const close = document.getElementById('projClose');
+      const stage = document.getElementById('modalStage');
+      const mPrev = document.getElementById('modalPrev');
+      const mNext = document.getElementById('modalNext');
+      const mDots = document.getElementById('modalDots');
+
+      let controller = null;
+
+      function openModal(opts){
+        title.textContent = opts.title || '';
+        desc.textContent  = opts.desc  || '';
+        stage.innerHTML = '';
+        mDots.innerHTML  = '';
+
+        const imgs = (opts.images || []).filter(Boolean);
+        imgs.forEach((src, i) => {
+          const img = document.createElement('img');
+          img.src = src; img.alt = `${opts.title || 'Project'} - image ${i+1}`;
+          img.className = 'g-slide' + (i===0 ? ' active' : '');
+          stage.appendChild(img);
+        });
+
+        if (imgs.length > 1) {
+          imgs.forEach((_, i) => {
+            const d = document.createElement('span');
+            d.className = 'g-dot' + (i===0 ? ' active' : '');
+            d.style.cursor = 'pointer';
+            mDots.appendChild(d);
+          });
+        }
+
+        const slides = Array.from(stage.querySelectorAll('.g-slide'));
+        const dots   = Array.from(mDots.querySelectorAll('.g-dot'));
+        let idx = 0;
+        function paint(){
+          slides.forEach((s,i)=> s.classList.toggle('active', i===idx));
+          dots.forEach((d,i)=> d.classList.toggle('active', i===idx));
+          if (window.lucide) lucide.createIcons();
+        }
+        function next(){ if(!slides.length) return; idx = (idx + 1) % slides.length; paint(); }
+        function prev(){ if(!slides.length) return; idx = (idx - 1 + slides.length) % slides.length; paint(); }
+        function goIndex(n){ if(!slides.length) return; idx = ((n%slides.length)+slides.length)%slides.length; paint(); }
+
+        controller = { next, prev, goIndex };
+
+        dots.forEach((d,i)=> d.addEventListener('click', ()=>goIndex(i)));
+        mPrev.onclick = prev; mNext.onclick = next;
+
+        let sx = null;
+        stage.addEventListener('touchstart', e=>{ sx = e.touches[0].clientX; }, {passive:true});
+        stage.addEventListener('touchend',   e=>{
+          if(sx===null) return;
+          const dx = e.changedTouches[0].clientX - sx;
+          if(Math.abs(dx) > 50){ dx > 0 ? prev() : next(); }
+          sx = null;
+        });
+
+        modal.classList.remove('hidden');
+        document.body.style.overflow='hidden';
+        if (window.lucide) lucide.createIcons();
+      }
+
+      function hideModal(){
+        modal.classList.add('hidden');
+        document.body.style.overflow='';
+      }
+      close.addEventListener('click', hideModal);
+      modal.addEventListener('click', (e)=>{ if(e.target===modal || e.target.classList.contains('bg-black/70')) hideModal(); });
+      document.addEventListener('keydown', (e)=>{
+        if(modal.classList.contains('hidden')) return;
+        if(e.key==='Escape') hideModal();
+        if(e.key==='ArrowLeft')  controller?.next?.();
+        if(e.key==='ArrowRight') controller?.prev?.();
+      });
+
+      document.querySelectorAll('.open-modal').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          const images = (btn.dataset.images || '').split(',').map(s=>s.trim()).filter(Boolean);
+          openModal({ title: btn.dataset.title || '', desc: btn.dataset.desc || '', images });
+        });
+      });
+    })();
+
+    // ========== Persian digits + "kVA -> کاوا" ONLY in FA ==========
+    function toFaDigits(str){
+      const fa = '۰۱۲۳۴۵۶۷۸۹'.split('');
+      return str.replace(/\d/g, d => fa[d]);
+    }
+    function localizeFaNumbersAndUnits(){
+      // Walk only visible FA language nodes
+      document.querySelectorAll('.lang.fa:not(.hidden)').forEach(scope=>{
+        walkTextNodes(scope, node=>{
+          let t = node.nodeValue;
+          if(!t || !t.trim()) return;
+          // Replace kVA/KVA/kva -> کاوا
+          t = t.replace(/kva|kVA|KVA/g,'کاوا');
+          // 24/7 -> ۲۴/۷
+          t = t.replace(/24\/7/g,'۲۴/۷');
+          // Convert digits
+          t = toFaDigits(t);
+          node.nodeValue = t;
+        });
+      });
+    }
+    function walkTextNodes(root, fn){
+      const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+      const nodes = []; let n; while(n = w.nextNode()) nodes.push(n);
+      nodes.forEach(node=>{
+        if(!node.nodeValue || !node.nodeValue.trim()) return;
+        const p = node.parentElement;
+        // Skip inside email/URL LTR islands
+        if(p && (p.closest('a[href^="mailto:"]') || p.closest('.keep-ltr') || p.closest('.latin'))) return;
+        fn(node);
+      });
+    }
   </script>
 
   <!-- JSON-LD -->
@@ -874,12 +1601,13 @@
     "url":"https://example.com",
     "logo":"https://example.com/assets/img/logo-htr-emisan.jpg",
     "sameAs":["https://instagram.com/htr.co.ir"],
-    "contactPoint":[{
-      "@type":"ContactPoint",
-      "telephone":"+98-41-3324-8543", "+98-914-215-8270", "+98-914-412-1572", "+98-914-666-4717",
-      "contactType":"customer service",
-      "areaServed":"IR"
-    }]}
+    "contactPoint":[
+      { "@type":"ContactPoint","telephone":"+98-41-3324-8543","contactType":"customer service","areaServed":"IR" },
+      { "@type":"ContactPoint","telephone":"+98-914-215-8270","contactType":"customer service","areaServed":"IR" },
+      { "@type":"ContactPoint","telephone":"+98-914-412-1572","contactType":"customer service","areaServed":"IR" },
+      { "@type":"ContactPoint","telephone":"+98-914-666-4717","contactType":"customer service","areaServed":"IR" }
+    ]
+  }
   </script>
 </body>
 </html>
